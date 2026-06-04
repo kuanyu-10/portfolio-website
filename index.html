@@ -218,50 +218,60 @@
             <h3>神戸観光レポート自動生成ツール</h3>
 
             <p>
-                神戸市の観光データを集計・分析し、
-                ExcelおよびPDF形式のレポートを自動生成するツールです。
+                神戸市内の観光スポットデータを分析し、
+                ExcelレポートおよびPDFレポートを自動生成する業務支援ツールです。
+                OpenAI APIを活用したAI分析サマリー機能も実装しています。
             </p>
 
             <h4>制作背景</h4>
 
             <p>
-                観光データの集計やレポート作成には多くの時間がかかるため、
-                作業の効率化を目的として開発しました。
+                前作「神戸観光ダッシュボード」では、
+                神戸市内の観光スポットデータを可視化し、
+                KPI分析やエリア分析を行いました。
 
-                データ分析からレポート出力までを自動化することで、
-                担当者の作業負担を軽減し、より迅速な意思決定を支援することを目指しています。
+                本作品では、その分析結果をもとに、
+                ExcelおよびPDF形式のレポートを自動生成する仕組みを開発しました。
+
+                実際の業務で発生する定期レポート作成作業を想定し、
+                データ分析からレポート出力までを自動化することを目的としています。
             </p>
 
             <h4>工夫した点</h4>
 
             <p>
-                Pandasを使用して観光データを集計し、
-                KPIを自動計算できるように設計しました。
+                評価点数とレビュー件数を組み合わせた独自指標
+                「Popularity Score」を利用し、
+                人気スポットTOP10、エリア分析、カテゴリ分析を自動生成できるようにしました。
 
-                また、Excel形式とPDF形式の両方で出力できるようにすることで、
-                社内共有や報告資料として活用しやすい構成にしています。
+                また、OpenPyXLを用いてExcelレポートを作成し、
+                ReportLabを用いて複数ページ構成のPDFレポートを自動生成しています。
 
-                手作業による集計ミスを減らし、
-                業務効率化につながるツールを目指しました。
+                さらに、OpenAI APIを活用し、
+                KPI・エリア分析・カテゴリ分析の結果をもとに
+                AI分析サマリーをPDFへ出力する機能を実装しました。
             </p>
 
             <p>
                 <strong>使用技術：</strong><br>
-                Python / Pandas / OpenPyXL / ReportLab
+                Python / Pandas / NumPy / OpenPyXL / ReportLab / OpenAI API
             </p>
 
             <h4>主な機能</h4>
 
             <ul>
-                <li>観光データ集計</li>
-                <li>KPI自動計算</li>
-                <li>レポート自動生成</li>
-                <li>Excel出力</li>
-                <li>PDF出力</li>
+                <li>KPI自動集計</li>
+                <li>Popularity Score算出</li>
+                <li>エリア分析</li>
+                <li>カテゴリ分析</li>
+                <li>人気スポットTOP10分析</li>
+                <li>Excelレポート自動生成</li>
+                <li>PDFレポート自動生成</li>
+                <li>AI分析サマリー生成</li>
             </ul>
 
             <div class="project-links">
-                <a href="https://github.com/kuanyu-10/kobe-report-generator" target="_blank">
+                <a href="https://github.com/kuanyu-10/kobe-tourism-report-generator" target="_blank">
                     GitHub Repository
                 </a>
             </div>
