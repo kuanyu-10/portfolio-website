@@ -634,3 +634,38 @@ body {
     .experience-section .career-list article:hover { padding-left:0; }
     .minimal-contact .contact-links .contact-action { padding:12px; }
 }
+/* High-contrast contact action cards */
+.minimal-contact .contact-links .contact-action {
+    min-height:78px;
+    border:1px solid rgba(255,255,255,.88);
+    background:#fff;
+    box-shadow:0 10px 24px rgba(4,16,48,.2);
+    color:#111c35;
+    backdrop-filter:none;
+}
+.minimal-contact .contact-links .contact-action:hover {
+    border-color:#fff;
+    background:#fff;
+    color:#111c35;
+    transform:translateY(-3px);
+    box-shadow:0 16px 32px rgba(4,16,48,.28);
+}
+.minimal-contact .contact-links .contact-action:focus-visible {
+    outline:3px solid #93c5fd;
+    outline-offset:4px;
+}
+.minimal-contact .contact-links .contact-copy small { color:#3157d5; }
+.minimal-contact .contact-links .contact-copy strong { color:#111c35; font-size:.86rem; }
+.minimal-contact .contact-links .contact-action > b {
+    padding:8px 11px;
+    border-radius:10px;
+    background:#3157d5;
+    color:#fff;
+    font-size:.7rem;
+    line-height:1.2;
+}
+.minimal-contact .contact-links .contact-action:hover > b { background:#1e40af; }
+.minimal-contact .contact-icon { color:#fff; background:linear-gradient(135deg,#3157d5,#1e40af); }
+@media (max-width:1040px) {
+    .minimal-contact .contact-links .contact-action > b { justify-self:start; }
+}
