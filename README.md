@@ -1,2 +1,2 @@
 # portfolio-website
-My portfolio website for SE and Programmer positions.
+Multilingual portfolio for IT project delivery, PM/PMO, business systems planning, and DX roles.

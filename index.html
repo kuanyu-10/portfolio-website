@@ -1,499 +1,128 @@
-﻿<!DOCTYPE html>
-<html lang="ja">
-
+<!DOCTYPE html>
+<html lang="ja" translate="no" class="notranslate">
 <head>
     <meta charset="UTF-8">
-    <title>黄 寛宇 | SE Portfolio</title>
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>黄 寛宇 ポートフォリオ｜ITプロジェクト推進・業務改善・データ活用</title>
+    <meta name="description" content="会計・マーケティング・運営PMの経験と、Web開発・データ分析の技術理解を活かし、業務課題の整理、要件定義、開発連携に取り組む黄寛宇のポートフォリオです。">
+    <link rel="canonical" href="https://kuanyu-10.github.io/portfolio-website/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://kuanyu-10.github.io/portfolio-website/">
+    <meta property="og:title" content="黄 寛宇｜ITプロジェクト推進ポートフォリオ">
+    <meta property="og:description" content="業務理解、要件整理、データ活用、技術部門との連携を強みに、ITプロジェクト推進に取り組んでいます。">
     <link rel="stylesheet" href="style.css">
+    <script src="language.js" defer></script>
+    <script src="site.js" defer></script>
+    <script src="back-to-top.js" defer></script>
 </head>
-
-<body>
-
-    <nav class="nav">
-        <div class="nav-links">
-            <a href="#journey">経歴</a>
-            <a href="#strengths">私の強み</a>
-            <a href="#tech">使用技術</a>
-            <a href="#projects">制作実績</a>
-            <a href="#roadmap">学習計画</a>
-            <a href="#contact">連絡先</a>
+<body data-title-ja="黄 寛宇 ポートフォリオ｜ITプロジェクト推進・業務改善・データ活用" data-title-zh="黃 寬宇作品集｜IT 專案推進・業務改善・資料應用" data-title-en="Kuan-Yu Huang | IT Project Delivery, Process Improvement & Data" data-description-ja="会計・マーケティング・運営PMの経験と、Web開発・データ分析の技術理解を活かし、業務課題の整理、要件定義、開発連携に取り組む黄寛宇のポートフォリオです。" data-description-zh="結合會計、行銷與營運 PM 經驗，以及 Web 開發與資料分析的技術理解，投入業務問題梳理、需求定義及開發協作。" data-description-en="Kuan-Yu Huang's portfolio, combining accounting, marketing, operations PM experience, web development, and data analysis to support requirements and project delivery.">
+    <nav class="site-nav" aria-label="Main navigation">
+        <div class="nav-inner">
+            <a class="nav-brand" href="#home" aria-label="Kuan-Yu Huang home"><span>KY</span><strong>Kuan-Yu Huang</strong></a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-menu"><span class="visually-hidden" data-ja="メニューを開く" data-zh="開啟選單" data-en="Open menu">メニューを開く</span><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" data-ja="ホーム" data-zh="首頁" data-en="Home">Home</a>
+                <a href="#experience" data-ja="経歴" data-zh="經歷" data-en="Experience">Experience</a>
+                <a href="#projects" data-ja="プロジェクト" data-zh="專案" data-en="Projects">Projects</a>
+                <a href="#strengths" data-ja="強みと進め方" data-zh="優勢與方法" data-en="Strengths &amp; Process">Strengths &amp; Process</a>
+                <a href="#skills" data-ja="スキル" data-zh="技能" data-en="Skills">Skills</a>
+                <a href="#contact" data-ja="お問い合わせ" data-zh="聯絡" data-en="Contact">Contact</a>
+            </div>
+            <div class="language-control">
+                <label for="language-select" class="visually-hidden" data-ja="表示言語" data-zh="顯示語言" data-en="Display language">表示言語</label><span aria-hidden="true">🌐</span>
+                <select id="language-select" aria-label="表示言語"><option value="auto">自動</option><option value="zh">中文</option><option value="en">English</option><option value="ja">日本語</option></select>
+            </div>
         </div>
     </nav>
 
-    <header class="hero">
+    <header class="hero" id="home">
         <div class="hero-content">
-            <p class="hero-tag">Business × Data Analysis × AI Application</p>
-
-            <h1>黄 寛宇</h1>
-
-            <p class="hero-kana">コウ クァンユー</p>
-
-            <h2>SE・プログラマー志望</h2>
-
-            <p class="hero-text">
-                会計・マーケティング・プロジェクトマネジメントの経験を活かし、
-                業務課題を理解したうえで、Webアプリケーション、
-                データ分析ダッシュボード、自動化ツール、AI活用システムを開発しています。
-            </p>
-
-            <div class="hero-keywords">
-                <span>Accounting</span>
-                <span>Marketing</span>
-                <span>Project Management</span>
-                <span>IT Development</span>
-            </div>
-
-            <div class="hero-buttons">
-                <a href="https://github.com/kuanyu-10" target="_blank">GitHubを見る</a>
-                <a href="#projects" class="outline-button">制作実績を見る</a>
+            <p class="eyebrow">BUSINESS × COORDINATION × TECHNOLOGY</p>
+            <h1 data-ja="黄 寛宇" data-zh="黃 寬宇" data-en="Kuan-Yu Huang">黄 寛宇</h1>
+            <p class="hero-kana" data-ja="コウ クァンユー" data-zh="HUANG KUAN-YU" data-en="HUANG KUAN-YU">コウ クァンユー</p>
+            <h2 data-ja="業務理解と技術理解を活かすITプロジェクト推進人材" data-zh="結合業務與技術理解的 IT 專案推進人才" data-en="IT project delivery grounded in business and technical understanding">業務理解と技術理解を活かすITプロジェクト推進人材</h2>
+            <p class="hero-lead" data-ja="会計、マーケティング、運営PMの経験を基盤に、業務課題の整理、機能企画、データ分析、Web開発に取り組んでいます。非技術部門と開発側の間に立ち、目的や要件を整理しながら、プロジェクトを前に進められる人材を目指しています。" data-zh="以會計、行銷與營運 PM 經驗為基礎，投入業務問題梳理、功能企劃、資料分析與 Web 開發。我的目標是站在非技術部門與開發端之間，整理目的與需求，協助專案務實向前推進。" data-en="Building on accounting, marketing, and operations PM experience, I work across problem framing, feature planning, data analysis, and web development. I aim to bridge non-technical teams and developers by clarifying goals and requirements so projects can move forward realistically.">会計、マーケティング、運営PMの経験を基盤に、業務課題の整理、機能企画、データ分析、Web開発に取り組んでいます。非技術部門と開発側の間に立ち、目的や要件を整理しながら、プロジェクトを前に進められる人材を目指しています。</p>
+            <div class="hero-actions">
+                <a class="button" href="#projects" data-ja="プロジェクトを見る" data-zh="查看專案" data-en="View projects">プロジェクトを見る</a>
+                <a class="button secondary" href="#strengths" data-ja="強みを見る" data-zh="查看優勢" data-en="View strengths">強みを見る</a>
+                <a class="button ghost" href="https://github.com/kuanyu-10" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a class="text-link" href="#contact">Contact →</a>
             </div>
         </div>
-
-        <div class="hero-visual"></div>
     </header>
 
-    <main>
-
-        <section id="journey" class="section">
-            <p class="section-label">CAREER PATH</p>
-            <h2>学歴・職歴の歩み</h2>
-
-            <div class="vertical-timeline">
-                <div class="timeline-row">
-                    <div class="timeline-year">2018 - 2022</div>
-                    <div class="timeline-content">
-                        <h3>会計学を学ぶ</h3>
-                        <p>台湾 中原大学 商学部会計学科にて、会計・財務・経営の基礎を学びました。</p>
-                    </div>
-                </div>
-
-                <div class="timeline-row">
-                    <div class="timeline-year">2022 - 2024</div>
-                    <div class="timeline-content">
-                        <h3>マーケティングを深める</h3>
-                        <p>国立中興大学大学院にて、市場分析、消費者行動、データ分析を学びました。</p>
-                    </div>
-                </div>
-
-                <div class="timeline-row">
-                    <div class="timeline-year">2024 - 2025</div>
-                    <div class="timeline-content">
-                        <h3>運営PMとして勤務</h3>
-                        <p>ライブ配信業界で、イベント企画、進行管理、データ分析、部門間調整を担当しました。</p>
-                    </div>
-                </div>
-
-                <div class="timeline-row">
-                    <div class="timeline-year">2026 - 2028</div>
-                    <div class="timeline-content">
-                        <h3>情報処理を学ぶ</h3>
-                        <p>神戸電子専門学校 情報処理学科にて、Python、Web開発、データ分析を学習中です。</p>
-                    </div>
-                </div>
-
-                <div class="timeline-row">
-                    <div class="timeline-year">Future</div>
-                    <div class="timeline-content">
-                        <h3>SEを目指す</h3>
-                        <p>業務理解力とITスキルを活かし、業務システム開発・DX推進に貢献できるSEを目指します。</p>
-                    </div>
-                </div>
+    <main class="home-main">
+        <section class="section experience-section" id="experience">
+            <div class="section-heading"><p class="eyebrow">EXPERIENCE & EDUCATION</p><h2 data-ja="会計 × マーケティング × IT" data-zh="會計 × 行銷 × IT" data-en="Accounting × Marketing × IT">会計 × マーケティング × IT</h2><p data-ja="数字と業務を理解し、利用者価値を考え、仕組みとして実現するための背景です。" data-zh="理解數字與業務、思考使用者價值，再以系統落實的跨領域背景。" data-en="A cross-disciplinary foundation for understanding operations, user value, and how systems bring ideas to life.">数字と業務を理解し、利用者価値を考え、仕組みとして実現するための背景です。</p></div>
+            <div class="background-triad"><div><span>01</span><h3 data-ja="会計" data-zh="會計" data-en="Accounting">会計</h3><p data-ja="業務と数字を理解する" data-zh="理解業務與數字" data-en="Understand operations and numbers">業務と数字を理解する</p></div><b>×</b><div><span>02</span><h3 data-ja="マーケティング" data-zh="行銷" data-en="Marketing">マーケティング</h3><p data-ja="利用者と価値を考える" data-zh="思考使用者與價值" data-en="Think about users and value">利用者と価値を考える</p></div><b>×</b><div><span>03</span><h3>IT</h3><p data-ja="仕組みとして実現する" data-zh="以系統加以實現" data-en="Turn ideas into systems">仕組みとして実現する</p></div></div>
+            <div class="career-list">
+                <article><time>2018 — 2022</time><div><h3 data-ja="中原大学 会計学科" data-zh="中原大學會計學系" data-en="Chung Yuan Christian University — Accounting">中原大学 会計学科</h3><p data-ja="会計、財務、経営の基礎を学び、数字から業務を捉える視点を身につけました。" data-zh="學習會計、財務與管理基礎，培養從數字理解業務的觀點。" data-en="Built foundations in accounting, finance, and management, learning to view operations through numbers.">会計、財務、経営の基礎を学び、数字から業務を捉える視点を身につけました。</p></div></article>
+                <article><time>2022 — 2024</time><div><h3 data-ja="国立中興大学大学院 マーケティング" data-zh="國立中興大學研究所・行銷" data-en="National Chung Hsing University — Marketing">国立中興大学大学院 マーケティング</h3><p data-ja="市場分析、消費者行動、データ分析を通じて、利用者と価値を考える力を深めました。" data-zh="透過市場分析、消費者行為及資料分析，深化思考使用者與價值的能力。" data-en="Deepened my understanding of users and value through market analysis, consumer behavior, and data analysis.">市場分析、消費者行動、データ分析を通じて、利用者と価値を考える力を深めました。</p></div></article>
+                <article><time>2024 — 2025</time><div><h3 data-ja="ライブ配信業界 運営PM" data-zh="直播產業・營運 PM" data-en="Live-streaming Industry — Operations PM">ライブ配信業界 運営PM</h3><p data-ja="イベント企画・運営、進行管理、データ分析、関係部門との調整、スケジュール管理、業務改善を担当しました。" data-zh="負責活動企劃與營運、進度管理、資料分析、跨部門協調、時程管理及業務改善。" data-en="Worked on event planning and operations, progress tracking, data analysis, cross-functional coordination, scheduling, and process improvement.">イベント企画・運営、進行管理、データ分析、関係部門との調整、スケジュール管理、業務改善を担当しました。</p></div></article>
+                <article><time>2026 — 2028</time><div><h3 data-ja="神戸電子専門学校 情報処理学科" data-zh="神戶電子專門學校・資訊處理科" data-en="Kobe Institute of Computing — Information Processing">神戸電子専門学校 情報処理学科</h3><p data-ja="Python、Web開発、データ分析、システム構成を学び、開発側と連携するための技術理解を深めています。" data-zh="研習 Python、Web 開發、資料分析及系統架構，深化與開發端合作所需的技術理解。" data-en="Studying Python, web development, data analysis, and system design to deepen the technical literacy needed for collaboration.">Python、Web開発、データ分析、システム構成を学び、開発側と連携するための技術理解を深めています。</p></div></article>
             </div>
         </section>
 
-        <section id="strengths" class="section">
-            <p class="section-label">STRENGTHS</p>
-            <h2>私の強み</h2>
+        <section class="section compact-section qualification-section" id="qualifications"><div class="section-heading"><p class="eyebrow">QUALIFICATIONS</p><h2 data-ja="資格・学習" data-zh="資格與學習" data-en="Qualifications & Learning">資格・学習</h2></div><div class="qualification-list"><span>JLPT N2</span><span>TOEIC 750</span><span data-ja="日商簿記3級" data-zh="日商簿記 3 級" data-en="Nissho Bookkeeping Level 3">日商簿記3級</span><span data-ja="日商簿記2級 学習中" data-zh="日商簿記 2 級・準備中" data-en="Nissho Bookkeeping Level 2 — in progress">日商簿記2級 学習中</span><span data-ja="基本情報技術者試験 学習中" data-zh="基本資訊技術者考試・準備中" data-en="Fundamental IT Engineer Exam — in progress">基本情報技術者試験 学習中</span></div></section>
 
-            <div class="card-grid three-columns">
-                <div class="info-card">
-                    <p class="card-number">01</p>
-                    <h3>業務理解力</h3>
-                    <p>
-                        会計・マーケティング・PM経験を活かし、
-                        業務課題を整理したうえでシステム設計を考えることができます。
-                    </p>
-                </div>
-
-                <div class="info-card">
-                    <p class="card-number">02</p>
-                    <h3>データ分析力</h3>
-                    <p>
-                        PandasやNumPyを用いてデータを整理し、
-                        KPI、ランキング、傾向分析として可視化できます。
-                    </p>
-                </div>
-
-                <div class="info-card">
-                    <p class="card-number">03</p>
-                    <h3>開発力</h3>
-                    <p>
-                        Flaskを中心に、AI API、Dashboard、Report生成など、
-                        業務支援を想定したWebアプリを開発しています。
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="tech" class="section">
-            <p class="section-label">TECH STACK</p>
-            <h2>使用技術</h2>
-
-            <div class="tech-grid">
-                <div class="tech-card">
-                    <h3>Backend</h3>
-                    <span>Python</span>
-                    <span>Flask</span>
-                    <span>REST API</span>
-                </div>
-
-                <div class="tech-card">
-                    <h3>Frontend</h3>
-                    <span>HTML</span>
-                    <span>CSS</span>
-                    <span>JavaScript</span>
-                </div>
-
-                <div class="tech-card">
-                    <h3>Data</h3>
-                    <span>Pandas</span>
-                    <span>NumPy</span>
-                    <span>Chart.js</span>
-                </div>
-
-                <div class="tech-card">
-                    <h3>AI</h3>
-                    <span>TensorFlow</span>
-                    <span>Keras</span>
-                    <span>OpenAI API</span>
-                    <span>LLM / Prompt Engineering</span>
-                </div>
-
-                <div class="tech-card">
-                    <h3>Automation</h3>
-                    <span>Excel</span>
-                    <span>PDF</span>
-                    <span>OpenPyXL</span>
-                    <span>ReportLab</span>
-                </div>
-
-                <div class="tech-card">
-                    <h3>Deploy</h3>
-                    <span>Git</span>
-                    <span>GitHub</span>
-                    <span>Render</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="section dark-section">
-            <div class="section-heading-row">
-                <div>
-                    <p class="section-label">FEATURED PROJECT</p>
-                    <h2>動物行動ログ分析・可視化システム</h2>
-                </div>
-
-                <p class="section-note">AI Demoではなく、業務システムとして設計</p>
-            </div>
-
-            <div class="featured-project">
-                <div class="featured-image">
-                    <img src="images/project4-banner.png" alt="動物行動ログ分析・可視化システム">
-                </div>
-
-                <div class="featured-content">
-                    <p class="project-badge">AI × Dashboard × Analytics</p>
-
-                    <p>
-                        画像認識AIを活用してカピバラの行動を分類し、行動ログの記録、
-                        ダッシュボードによる可視化、異常傾向の分析、
-                        AI観察レポート生成までを行うWebシステムです。
-                    </p>
-
-                    <h3>制作背景</h3>
-                    <p>
-                        飼育現場では、動物の行動を継続的に記録し、
-                        異常の兆候を早期に把握することが重要です。
-                        本システムでは画像認識とログ管理を組み合わせ、
-                        観察業務を支援する仕組みを想定しました。
-                    </p>
-
-                    <h3>工夫した点</h3>
-                    <p>
-                        AI判定結果を単なる表示で終わらせず、CSVログ、Dashboard、
-                        異常分析、AIレポートまでつなげることで、
-                        業務システムとして説明できる構成にしました。
-                    </p>
-
-                    <div class="tag-list">
-                        <span>Flask</span>
-                        <span>TensorFlow</span>
-                        <span>Keras</span>
-                        <span>Pandas</span>
-                        <span>Chart.js</span>
-                        <span>OpenAI API</span>
-                    </div>
-
-                    <div class="project-links">
-                        <a href="https://animal-behavior-analytics-app.onrender.com" target="_blank">Live Demo</a>
-                        <a href="https://github.com/kuanyu-10/animal-behavior-analytics-app" target="_blank"
-                            class="outline-button dark-outline">GitHub</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <p class="section-label">SYSTEM ARCHITECTURE</p>
-            <h2>システム構成</h2>
-
-            <div class="flow">
-                <div class="flow-item">Camera</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-item">Image / Video</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-item">AI Classification</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-item">Behavior Log</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-item">Dashboard</div>
-                <div class="flow-arrow">→</div>
-                <div class="flow-item">AI Report</div>
-            </div>
-        </section>
-
-        <section class="section">
-            <p class="section-label">KOBE TOURISM DX SERIES</p>
-            <h2>神戸観光DXシリーズ</h2>
-
-            <p class="section-description">
-                神戸という地域を題材に、観光案内、データ可視化、
-                レポート自動生成までを段階的に発展させたDX企画シリーズです。
-            </p>
-
-            <div class="card-grid three-columns">
-
-                <details class="project-card">
+        <section class="section projects-section" id="projects">
+            <div class="section-heading"><p class="eyebrow">FEATURED PROJECTS</p><h2 data-ja="代表プロジェクト" data-zh="代表專案" data-en="Featured Projects">代表プロジェクト</h2><p data-ja="企画から検証までの流れを、2つの事例で紹介します。" data-zh="以兩個案例呈現從企劃到驗證的過程。" data-en="Two cases showing the path from planning to validation.">企画から検証までの流れを、2つの事例で紹介します。</p></div>
+            <div class="project-accordion-grid">
+                <details class="project-accordion">
                     <summary>
-                        <span>Project 01</span>
-                        神戸観光AIサポート
-                        <small>AI Chat System</small>
-                        <p class="project-preview">
-                            観光客向けFAQをAIで自動応答
-                        </p>
-
-                        <div class="project-mini-tags">
-                            <span>Flask</span>
-                            <span>OpenAI API</span>
-                            <span>JavaScript</span>
-                        </div>
-
-                        <div class="project-summary-footer">
-                            <span>詳細を見る</span>
-                            <span class="arrow">→</span>
-                        </div>
+                        <div class="project-preview kobe-preview" role="img" aria-label="神戸観光 AI ポータル feature overview"><div class="preview-title">KOBE TOURISM<br><strong>AI PORTAL</strong></div><div class="preview-modules"><span>AI Guide</span><span>Dashboard</span><span>Excel / PDF</span></div></div>
+                        <div class="project-summary-copy"><div class="project-meta-line"><span>Integrated Service</span><span>01</span></div><h3 data-ja="神戸観光 AI ポータル" data-zh="神戶觀光 AI 入口網站" data-en="Kobe Tourism AI Portal">神戸観光 AI ポータル</h3><p class="project-position" data-ja="観光案内、分析、レポートを統合した多言語ポータル。" data-zh="整合觀光導覽、分析與報告的多語入口網站。" data-en="A multilingual portal unifying guidance, analytics, and reporting.">観光案内、分析、レポートを統合した多言語ポータル。</p><span class="accordion-toggle"><span class="when-closed" data-ja="プロジェクトを開く" data-zh="展開專案" data-en="Expand project">プロジェクトを開く</span><span class="when-open" data-ja="閉じる" data-zh="收合" data-en="Collapse">閉じる</span><b aria-hidden="true">＋</b></span></div>
                     </summary>
-
-                    <div class="project-detail">
-                        <h4>制作背景</h4>
-                        <p>
-                            観光客が神戸の観光地について気軽に質問できるように、
-                            AIチャット形式の観光サポートアプリを制作しました。
-                        </p>
-
-                        <h4>使用技術</h4>
-                        <p>Flask / OpenAI API / HTML / CSS / JavaScript</p>
-
-                        <h4>工夫した点</h4>
-                        <p>
-                            FAQだけでなく、OpenAI APIを利用して自然な回答を生成できるようにしました。
-                            フロントエンドとバックエンドを分け、API連携の流れを理解できる構成にしました。
-                        </p>
-                    </div>
-
-                    <div class="project-links">
-                        <a href="https://kobe-tourism-ai-support.onrender.com" target="_blank">Live Demo</a>
-                        <a href="https://github.com/kuanyu-10/kobe-tourism-ai-support" target="_blank"
-                            class="outline-button">GitHub</a>
+                    <div class="project-content">
+                        <dl class="pm-facts"><div><dt>Users</dt><dd data-ja="旅行者・観光担当者・運営担当者" data-zh="旅客・觀光服務・營運人員" data-en="Travelers, tourism staff, operators">旅行者・観光担当者・運営担当者</dd></div><div><dt>Role</dt><dd data-ja="課題設定・要件整理・開発・統合" data-zh="問題定義・需求整理・開發整合" data-en="Problem framing, requirements, build, integration">課題設定・要件整理・開発・統合</dd></div><div><dt>Phase</dt><dd data-ja="段階検証から統合版へ" data-zh="從階段驗證到整合版" data-en="Phased validation to integrated release">段階検証から統合版へ</dd></div><div><dt>Focus</dt><dd data-ja="利用者機能と業務機能の統合" data-zh="整合使用者與業務功能" data-en="Unifying user and operational flows">利用者機能と業務機能の統合</dd></div></dl>
+                        <p data-ja="AI観光案内、スポット分析、Excel・PDFレポート生成を段階的に検証し、一つのサービスへ統合しました。" data-zh="分階段驗證 AI 觀光導覽、景點分析及 Excel／PDF 報告，再整合成單一服務。" data-en="AI guidance, attraction analytics, and Excel/PDF reporting were validated in stages and integrated into one service.">AI観光案内、スポット分析、Excel・PDFレポート生成を段階的に検証し、一つのサービスへ統合しました。</p>
+                        <div class="tag-list"><span>Project Planning</span><span>Requirement Definition</span><span>Python</span><span>Data Analysis</span><span>AI Integration</span></div>
+                        <div class="project-actions"><a class="button" href="https://kobe-tourism-portal-2026.web.app/" target="_blank" rel="noopener noreferrer" data-ja="デモを見る" data-zh="查看展示" data-en="Live Demo">Live Demo</a><a class="button secondary" href="projects/kobe-tourism-portal.html" data-ja="詳細を見る" data-zh="查看詳情" data-en="View details">詳細を見る</a></div>
                     </div>
                 </details>
-
-                <details class="project-card">
+                <details class="project-accordion">
                     <summary>
-                        <span>Project 02</span>
-                        神戸観光ダッシュボード
-                        <small>Data Visualization Dashboard</small>
-                        <p class="project-preview">
-                            地域別・カテゴリ別の傾向を可視化
-                        </p>
-
-                        <div class="project-mini-tags">
-                            <span>Pandas</span>
-                            <span>Chart.js</span>
-                            <span>Flask</span>
-                        </div>
-                        
-                        <div class="project-summary-footer">
-                            <span>詳細を見る</span>
-                            <span class="arrow">→</span>
-                        </div>
+                        <div class="project-preview animal-preview"><img src="images/project4-banner.png" alt="動物行動ログ分析・可視化システムのプロジェクトイメージ" data-alt-ja="動物行動ログ分析・可視化システムのプロジェクトイメージ" data-alt-zh="動物行為紀錄分析與視覺化系統專案圖片" data-alt-en="Animal behavior log analytics and visualization project image"></div>
+                        <div class="project-summary-copy"><div class="project-meta-line"><span>Prototype</span><span>02</span></div><h3 data-ja="動物行動ログ分析・可視化システム" data-zh="動物行為紀錄分析與視覺化系統" data-en="Animal Behavior Log Analytics System">動物行動ログ分析・可視化システム</h3><p class="project-position" data-ja="画像解析と行動ログを組み合わせた観察支援プロトタイプ。" data-zh="結合影像分析與行為紀錄的觀察支援原型。" data-en="An observation-support prototype combining image analysis and behavior logs.">画像解析と行動ログを組み合わせた観察支援プロトタイプ。</p><span class="accordion-toggle"><span class="when-closed" data-ja="プロジェクトを開く" data-zh="展開專案" data-en="Expand project">プロジェクトを開く</span><span class="when-open" data-ja="閉じる" data-zh="收合" data-en="Collapse">閉じる</span><b aria-hidden="true">＋</b></span></div>
                     </summary>
-
-                    <div class="project-detail">
-                        <h4>制作背景</h4>
-                        <p>
-                            観光スポットの評価やレビュー数を整理し、
-                            地域別・カテゴリ別に分析できるダッシュボードを制作しました。
-                        </p>
-
-                        <h4>使用技術</h4>
-                        <p>Flask / Pandas / NumPy / Chart.js / REST API</p>
-
-                        <h4>工夫した点</h4>
-                        <p>
-                            人気指数を定義し、単なるレビュー数ではなく、
-                            評価とレビュー数を組み合わせて観光スポットを比較できるようにしました。
-                        </p>
-                    </div>
-
-                    <div class="project-links">
-                        <a href="https://kobe-tourism-dashboard.onrender.com/" target="_blank">Live Demo</a>
-                        <a href="https://github.com/kuanyu-10/kobe-tourism-dashboard" target="_blank"
-                            class="outline-button">GitHub</a>
+                    <div class="project-content">
+                        <dl class="pm-facts"><div><dt>Users</dt><dd data-ja="動物園スタッフ・飼育員・研究施設" data-zh="動物園人員・飼育員・研究機構" data-en="Zoo staff, keepers, research facilities">動物園スタッフ・飼育員・研究施設</dd></div><div><dt>Role</dt><dd data-ja="利用シーン整理・範囲定義・検証" data-zh="使用情境・範圍定義・技術驗證" data-en="Use cases, scope definition, validation">利用シーン整理・範囲定義・検証</dd></div><div><dt>Phase</dt><dd>Prototype</dd></div><div><dt>Focus</dt><dd data-ja="制約を踏まえた実行可能な範囲設計" data-zh="依限制設計可執行範圍" data-en="Feasible scope under technical constraints">制約を踏まえた実行可能な範囲設計</dd></div></dl>
+                        <p data-ja="入力、画像登録、行動分類、ログ、可視化の流れを設計し、技術制約に合わせて検証範囲を調整しました。" data-zh="設計輸入、圖片登錄、行為分類、紀錄及視覺化流程，並依技術限制調整驗證範圍。" data-en="I designed the input, image, classification, logging, and visualization flow, adapting scope to technical constraints.">入力、画像登録、行動分類、ログ、可視化の流れを設計し、技術制約に合わせて検証範囲を調整しました。</p>
+                        <div class="tag-list"><span>Prototype Planning</span><span>Requirement Analysis</span><span>AI Image Analysis</span><span>Data Visualization</span><span>Python</span></div>
+                        <div class="project-actions"><a class="button" href="https://animal-behavior-analytics-2026.web.app/" target="_blank" rel="noopener noreferrer" data-ja="デモを見る" data-zh="查看展示" data-en="Live Demo">Live Demo</a><a class="button secondary" href="projects/animal-behavior-analytics.html" data-ja="詳細を見る" data-zh="查看詳情" data-en="View details">詳細を見る</a></div>
                     </div>
                 </details>
-
-                <details class="project-card">
-                    <summary>
-                        <span>Project 03</span>
-                        神戸観光レポート自動生成ツール
-                        <small>Report Automation Tool</small>
-                        <p class="project-preview">
-                            Excel・PDFレポート作成を自動化
-                        </p>
-
-                        <div class="project-mini-tags">
-                            <span>Python</span>
-                            <span>OpenPyXL</span>
-                            <span>PDF</span>
-                        </div>
-                        
-                        <div class="project-summary-footer">
-                            <span>詳細を見る</span>
-                            <span class="arrow">→</span>
-                        </div>
-                    </summary>
-
-                    <div class="project-detail">
-                        <h4>制作背景</h4>
-                        <p>
-                            手作業で作成していた観光分析レポートを、
-                            Pythonで自動生成する業務効率化ツールとして制作しました。
-                        </p>
-
-                        <h4>使用技術</h4>
-                        <p>Python / Pandas / OpenPyXL / ReportLab / PDF</p>
-
-                        <h4>工夫した点</h4>
-                        <p>
-                            ExcelとPDFの両方に対応し、
-                            KPI、地域別分析、カテゴリ別分析、ランキングを出力できるようにしました。
-                        </p>
-                    </div>
-
-                    <div class="project-links">
-                        <a href="https://github.com/kuanyu-10/kobe-tourism-report-generator" target="_blank">
-                            GitHub
-                        </a>
-                    </div>
-                </details>
-
             </div>
         </section>
 
-        <section id="roadmap" class="section">
-            <p class="section-label">LEARNING ROADMAP</p>
-            <h2>今後の学習計画</h2>
+        <section class="section integrated-delivery-section" id="strengths">
+            <span id="process" class="anchor-alias" aria-hidden="true"></span>
+            <div class="section-heading"><p class="eyebrow">PM STRENGTHS × DELIVERY PROCESS</p><h2 data-ja="強みをプロジェクト推進へつなげる" data-zh="將 PM 優勢轉化為專案推進" data-en="Turning PM Strengths into Delivery">強みをプロジェクト推進へつなげる</h2><p data-ja="業務理解、要件整理、技術連携、データ活用を一つの推進プロセスとして実践します。" data-zh="將業務理解、需求整理、技術協作與資料應用串成一套推進流程。" data-en="Business understanding, requirements, technical coordination, and data become one delivery process.">業務理解、要件整理、技術連携、データ活用を一つの推進プロセスとして実践します。</p></div>
+            <ol class="integrated-delivery-list">
+                <li><span class="delivery-number">01</span><p class="delivery-phase">DISCOVER</p><h3 data-ja="業務課題を理解する" data-zh="理解業務問題" data-en="Understand the Business Problem">業務課題を理解する</h3><p data-ja="会計、マーケティング、運営経験を活かし、利用者、目的、現状の負担を整理します。" data-zh="運用會計、行銷與營運經驗，整理使用者、目的及目前負擔。" data-en="Use cross-functional experience to clarify users, goals, and current burdens.">会計、マーケティング、運営経験を活かし、利用者、目的、現状の負担を整理します。</p></li>
+                <li><span class="delivery-number">02</span><p class="delivery-phase">DEFINE</p><h3 data-ja="要件と機能へ落とし込む" data-zh="轉化為需求與功能" data-en="Define Requirements & Features">要件と機能へ落とし込む</h3><p data-ja="曖昧な要望を、業務フロー、必要機能、優先順位、制約に分解します。" data-zh="將模糊需求拆解為業務流程、必要功能、優先順序與限制。" data-en="Break ambiguity into workflows, features, priorities, and constraints.">曖昧な要望を、業務フロー、必要機能、優先順位、制約に分解します。</p></li>
+                <li><span class="delivery-number">03</span><p class="delivery-phase">VALIDATE</p><h3 data-ja="技術部門と小さく検証する" data-zh="與技術端小規模驗證" data-en="Validate with Development">技術部門と小さく検証する</h3><p data-ja="Web、Python、AIの理解を活かし、制約を確認しながら重要機能から検証します。" data-zh="運用 Web、Python 與 AI 理解，在確認限制的同時優先驗證關鍵功能。" data-en="Use technical literacy to validate critical functions within real constraints.">Web、Python、AIの理解を活かし、制約を確認しながら重要機能から検証します。</p></li>
+                <li><span class="delivery-number">04</span><p class="delivery-phase">IMPROVE</p><h3 data-ja="データで改善し統合する" data-zh="以資料改善並整合" data-en="Improve & Integrate with Data">データで改善し統合する</h3><p data-ja="結果を可視化し、画面、機能、導線を調整して一貫したサービスへ統合します。" data-zh="視覺化結果並調整畫面、功能與動線，整合成一致的服務。" data-en="Visualize results, refine flows and features, then integrate a coherent service.">結果を可視化し、画面、機能、導線を調整して一貫したサービスへ統合します。</p></li>
+            </ol>
+        </section>
 
-            <div class="roadmap">
-                <div class="roadmap-item">
-                    <span>Now</span>
-                    <h3>Python / Flask / Dashboard</h3>
-                    <p>Webアプリ、REST API、データ可視化を中心に学習中です。</p>
-                </div>
 
-                <div class="roadmap-item">
-                    <span>Next</span>
-                    <h3>基本情報技術者試験</h3>
-                    <p>IT基礎、アルゴリズム、ネットワーク、DBの理解を深めます。</p>
-                </div>
 
-                <div class="roadmap-item">
-                    <span>Future</span>
-                    <h3>ERP / 業務システム</h3>
-                    <p>会計知識を活かし、業務システム開発やERP導入支援に挑戦します。</p>
-                </div>
+        <section class="section" id="skills">
+            <div class="section-heading"><p class="eyebrow">TOOLS & TECHNICAL LITERACY</p><h2 data-ja="技術理解と活用ツール" data-zh="技術理解與應用工具" data-en="Technical Literacy & Tools">技術理解と活用ツール</h2><p data-ja="企画や要件整理に加え、開発側と具体的にコミュニケーションできるよう、Web、データ、AIの実装経験を積んでいます。" data-zh="除了企劃與需求整理，也累積 Web、資料及 AI 實作經驗，以便和開發端具體溝通。" data-en="Hands-on experience across web, data, and AI supports concrete communication with development teams.">企画や要件整理に加え、開発側と具体的にコミュニケーションできるよう、Web、データ、AIの実装経験を積んでいます。</p></div>
+            <div class="skill-grid">
+                <article><h3>Project / Business</h3><div class="tag-list"><span>Requirement Analysis</span><span>Feature Planning</span><span>Project Coordination</span><span>Process Design</span><span>Documentation</span><span>Data-driven Improvement</span></div></article>
+                <article><h3>Development</h3><div class="tag-list"><span>Python</span><span>Flask</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Git</span><span>GitHub</span><span>Godot</span></div></article>
+                <article><h3>Data</h3><div class="tag-list"><span>Pandas</span><span>NumPy</span><span>Excel</span><span>OpenPyXL</span><span>Chart.js</span><span>Data Visualization</span></div></article>
+                <article><h3>AI / Automation</h3><div class="tag-list"><span>OpenAI API</span><span>TensorFlow</span><span>Keras</span><span>OpenCV</span><span>AI-assisted Development</span><span>ReportLab</span></div></article>
             </div>
         </section>
 
-        <section id="qualifications" class="section">
-            <p class="section-label">QUALIFICATIONS</p>
-            <h2>資格・認定</h2>
-
-            <div class="qualification-list">
-                <span>JLPT N2</span>
-                <span>TOEIC 750</span>
-                <span>日商簿記3級</span>
-                <span>日商簿記2級 学習中</span>
-                <span>基本情報技術者試験 学習中</span>
-            </div>
-        </section>
-
-        <section id="contact" class="section contact-section">
-            <div class="contact-layout">
-                <div class="contact-text">
-                    <p class="section-label">CONTACT</p>
-                    <h2>Get In Touch</h2>
-
-                    <p class="contact-message">
-                        会計・マーケティング・PM経験を活かし、<br>
-                        Business × Data × AI を強みに、<br>
-                        DX推進に貢献できるSEを目指しています。
-                    </p>
-                </div>
-
-                <div class="contact-card">
-                    <div class="contact-item">
-                        <span class="contact-icon">✉ Email</span>
-                        <a href="mailto:andrewas09253@gmail.com">
-                            andrewas09253@gmail.com
-                        </a>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon">🐙 GitHub</span>
-                        <a href="https://github.com/kuanyu-10" target="_blank">
-                            View GitHub →
-                        </a>
-                    </div>
-
-                    <div class="contact-item">
-                        <span class="contact-icon">🌐 Portfolio</span>
-                        <a href="https://kuanyu-10.github.io/portfolio-website/" target="_blank">
-                            View Portfolio →
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <p class="footer-message">
-                Thank you for visiting my portfolio. <br>
-                © 2026 Kuan-Yu Huang
-            </p>
-        </section>
-
+        <section class="section contact-section minimal-contact" id="contact"><div><p class="eyebrow">CONTACT</p><h2 data-ja="連絡先" data-zh="聯絡方式" data-en="Contact">連絡先</h2></div><div class="contact-links"><a class="contact-action" href="mailto:andrewas09253@gmail.com" data-aria-ja="メールを送る" data-aria-zh="傳送電子郵件" data-aria-en="Send an email"><span class="contact-icon" aria-hidden="true">@</span><span class="contact-copy"><small>Email</small><strong>andrewas09253@gmail.com</strong></span><b data-ja="メールを送る →" data-zh="傳送郵件 →" data-en="Send email →">メールを送る →</b></a><a class="contact-action" href="https://github.com/kuanyu-10" target="_blank" rel="noopener noreferrer" data-aria-ja="GitHubプロフィールを見る" data-aria-zh="查看 GitHub 個人檔案" data-aria-en="View GitHub profile"><span class="contact-icon" aria-hidden="true">GH</span><span class="contact-copy"><small>GitHub</small><strong>kuanyu-10</strong></span><b data-ja="プロフィールを見る ↗" data-zh="查看個人檔案 ↗" data-en="View profile ↗">プロフィールを見る ↗</b></a></div></section>
     </main>
 
+    <footer class="site-footer"><p data-ja="ご覧いただき、ありがとうございます。" data-zh="感謝您的瀏覽。" data-en="Thank you for visiting.">ご覧いただき、ありがとうございます。</p><span>© 2026 Kuan-Yu Huang</span></footer>
+    <button id="back-to-top" class="back-to-top" type="button" aria-label="ページ上部へ戻る" title="ページ上部へ戻る" aria-hidden="true" tabindex="-1"><span aria-hidden="true">↑</span></button>
 </body>
-
 </html>
