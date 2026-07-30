@@ -1203,7 +1203,7 @@ body.lightbox-open { overflow:hidden; }
 .case-number { margin:34px 0 0; color:var(--case-accent); font-size:.7rem; font-weight:900; letter-spacing:.16em; }
 .case-study .detail-badges { margin-top:14px; }
 .case-study .detail-badges span { border-color:var(--case-line); color:var(--case-accent-dark); background:rgba(255,255,255,.78); }
-.case-study .detail-hero h1 { max-width:690px; margin-top:18px; font-size:clamp(2.6rem,5.4vw,4.6rem); line-height:1.08; }
+.case-study .detail-hero h1 { max-width:690px; margin-top:18px; font-size:clamp(2.3rem,4.4vw,3.8rem); line-height:1.14; letter-spacing:-.025em; text-wrap:balance; }
 .case-study .detail-lead { max-width:660px; color:#334155; font-size:clamp(1.05rem,1.6vw,1.22rem); line-height:1.85; }
 .case-study .button { border-color:var(--case-accent); background:var(--case-accent); }
 .case-study .button:hover { background:var(--case-accent-dark); }
@@ -1283,7 +1283,7 @@ body.lightbox-open { overflow:hidden; }
 @media (max-width:620px) {
     .case-study .detail-hero { padding:30px 20px 24px; gap:32px; }
     .case-number { margin-top:27px; }
-    .case-study .detail-hero h1 { font-size:clamp(2.25rem,11vw,3.25rem); }
+    .case-study .detail-hero h1 { font-size:clamp(1.95rem,8vw,2.55rem); line-height:1.18; }
     .visual-window { border-radius:19px; transform:none; }
     .kobe-dashboard { min-height:280px; padding:14px; grid-template-columns:1fr; }
     .kobe-map { min-height:205px; }
