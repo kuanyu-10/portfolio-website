@@ -126,10 +126,12 @@ function Invoke-WorkflowGit {
 
     $previousLocation = Get-Location
     $previousErrorActionPreference = $ErrorActionPreference
+    $previousOutputEncoding = [Console]::OutputEncoding
     try {
         if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
             throw 'Git executable was not found on PATH.'
         }
+        [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
         Set-Location -LiteralPath $ProjectRoot
         $ErrorActionPreference = 'Continue'
         $outputLines = @(& git @Arguments 2>&1 | ForEach-Object { $_.ToString() })
@@ -141,6 +143,7 @@ function Invoke-WorkflowGit {
         $output = $_.Exception.Message
     }
     finally {
+        [Console]::OutputEncoding = $previousOutputEncoding
         $ErrorActionPreference = $previousErrorActionPreference
         Set-Location -LiteralPath $previousLocation
     }
