@@ -47,6 +47,11 @@
         return element.getAttribute(`data-${prefix}-${language}`);
     }
 
+    function setMetaContent(selector, value) {
+        const element = document.querySelector(selector);
+        if (element && value) element.content = value;
+    }
+
     function render(language) {
         const active = SUPPORTED.has(language) ? language : "en";
         document.documentElement.lang = HTML_LANG[active];
@@ -69,6 +74,13 @@
         if (title) document.title = title;
         const description = document.querySelector('meta[name="description"]');
         if (description && descriptionText) description.content = descriptionText;
+        setMetaContent('meta[property="og:title"]', title);
+        setMetaContent('meta[property="og:description"]', descriptionText);
+        setMetaContent('meta[name="twitter:title"]', title);
+        setMetaContent('meta[name="twitter:description"]', descriptionText);
+        const socialImageAlt = body.dataset[`socialImageAlt${suffix}`];
+        setMetaContent('meta[property="og:image:alt"]', socialImageAlt);
+        setMetaContent('meta[name="twitter:image:alt"]', socialImageAlt);
 
         const select = document.getElementById("language-select");
         const label = document.querySelector('label[for="language-select"]');

@@ -1,0 +1,57 @@
+# Agent Changelog
+
+此檔案採追加式記錄。請勿在此重複整份 `HANDOFF.md`。
+
+## 尚未初始化 — Initialization / UNINITIALIZED
+
+### Changed
+
+- 建立工作流狀態檔範本。
+
+### Validation
+
+- NOT_CONFIGURED
+
+### Decisions
+
+- 尚無。
+
+### Known Issues
+
+- 尚未設定專案驗證。
+
+### Git
+
+- 尚無。
+
+### Environment
+
+- 尚無。
+## 2026-07-30 11:41 —  / IN_PROGRESS
+
+### Changed
+
+- 更新正式交接狀態。
+
+### Validation
+
+- NOT_CONFIGURED
+
+### Decisions
+
+- 依工作流安全規則處理 commit、push 與 package。
+
+### Known Issues
+
+- Not staged: images/og-portfolio.png (unknown binary or file type); Validation is NOT_CONFIGURED; this is not PASS.
+
+### Git
+
+- Branch: main
+- Base commit: 0fb3d8045bad8acc0ba1d93548dd97270a7a8218
+- Push status: NOT_PUSHED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0

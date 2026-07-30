@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "projectName": "",
+  "defaultBranch": "main",
+  "pushOnShutdown": true,
+  "createPackageOnShutdown": true,
+  "copyPackageToGoogleDrive": false,
+  "googleDriveBackupDirectory": "",
+  "handoffOutputDirectory": "",
+  "maximumAutoAddFileSizeMB": 50,
+  "includeGitIgnoredFilesInPackage": false,
+  "includePortableTools": false,
+  "validationCommand": "",
+  "validationWorkingDirectory": "",
+  "packageExclusions": [],
+  "protectedPaths": []
+}

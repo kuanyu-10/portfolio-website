@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Codex Cross-Device Project State",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "workflowVersion",
+    "project",
+    "status",
+    "validationStatus",
+    "pushStatus",
+    "packageStatus",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "workflowVersion": { "type": "string" },
+    "project": { "type": "string" },
+    "phase": { "type": "string" },
+    "status": {
+      "enum": [
+        "UNINITIALIZED",
+        "READY",
+        "IN_PROGRESS",
+        "BLOCKED",
+        "VALIDATION_FAILED",
+        "HANDOFF_READY",
+        "COMPLETE"
+      ]
+    },
+    "workingBranch": { "type": "string" },
+    "lastValidatedCommit": { "type": "string" },
+    "lastKnownCommit": { "type": "string" },
+    "lastComputer": { "type": "string" },
+    "lastAgent": { "type": "string" },
+    "hasUncommittedChanges": { "type": "boolean" },
+    "localAheadCount": { "type": "integer", "minimum": 0 },
+    "localBehindCount": { "type": "integer", "minimum": 0 },
+    "branchDiverged": { "type": "boolean" },
+    "pushStatus": {
+      "enum": ["UNKNOWN", "NOT_REQUIRED", "NOT_PUSHED", "PUSHED", "FAILED"]
+    },
+    "validationStatus": {
+      "enum": ["PASS", "FAIL", "NOT_CONFIGURED", "BLOCKED", "SKIPPED"]
+    },
+    "packageStatus": {
+      "enum": ["NOT_CREATED", "CREATED", "COPIED_TO_BACKUP", "FAILED"]
+    },
+    "nextTasks": { "type": "array", "items": { "type": "string" } },
+    "blockers": { "type": "array", "items": { "type": "string" } },
+    "updatedAt": { "type": "string" }
+  }
+}

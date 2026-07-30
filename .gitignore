@@ -1,0 +1,45 @@
+# BEGIN CODEX CROSS-DEVICE WORKFLOW
+# Local workflow config
+workflow.config.json
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+credentials.*
+secrets.*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Office temporary files
+~$*
+*.tmp
+
+# Google Drive conflict files
+*conflicted copy*
+*衝突的副本*
+
+# Logs and temp
+logs/
+temp/
+tmp/
+.workflow/runtime/
+
+# Handoff packages
+handoff_packages/
+*_handoff_*.zip
+*_backup_*.zip
+
+# Generic build outputs
+build/
+dist/
+out/
+exports/
+
+# Private source documents (local reference only; never publish)
+/香料植物購買意願之影響因素分析.docx
+/獲獎紀錄/
+# END CODEX CROSS-DEVICE WORKFLOW

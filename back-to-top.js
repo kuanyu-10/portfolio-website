@@ -3,6 +3,7 @@
 
     const button = document.getElementById("back-to-top");
     if (!button) return;
+    const value = button.querySelector(".back-to-top-value");
 
     const labels = {
         ja: "ページ上部へ戻る",
@@ -21,6 +22,11 @@
 
     function updateVisibility() {
         const visible = window.scrollY > Math.min(560, window.innerHeight * 0.75);
+        const scrollable = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+        const progress = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
+        const percentage = `${Math.round(progress * 100)}%`;
+        button.style.setProperty("--page-progress", percentage);
+        if (value) value.textContent = percentage;
         button.classList.toggle("is-visible", visible);
         button.setAttribute("aria-hidden", String(!visible));
         button.tabIndex = visible ? 0 : -1;

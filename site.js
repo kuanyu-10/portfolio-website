@@ -68,3 +68,98 @@
     window.addEventListener("resize", requestNavigationUpdate);
     updateNavigationState();
 })();
+
+// Premium motion and reading progress
+(() => {
+    "use strict";
+
+    const progress = document.querySelector(".scroll-progress span");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let progressTicking = false;
+
+    function updateProgress() {
+        const scrollable = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+        const ratio = Math.min(Math.max(window.scrollY / scrollable, 0), 1);
+        if (progress) progress.style.transform = `scaleX(${ratio})`;
+        progressTicking = false;
+    }
+
+    function requestProgressUpdate() {
+        if (progressTicking) return;
+        progressTicking = true;
+        window.requestAnimationFrame(updateProgress);
+    }
+
+    window.addEventListener("scroll", requestProgressUpdate, { passive: true });
+    window.addEventListener("resize", requestProgressUpdate);
+    updateProgress();
+
+    const targets = [...document.querySelectorAll(".home-main > .section")];
+    if (reducedMotion || !("IntersectionObserver" in window)) {
+        targets.forEach(target => target.classList.add("is-visible"));
+        return;
+    }
+
+    document.documentElement.classList.add("reveal-enabled");
+    targets.forEach(target => target.classList.add("reveal-target"));
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+        });
+    }, { threshold: 0.08, rootMargin: "0px 0px -48px" });
+    targets.forEach(target => observer.observe(target));
+})();
+// Accessible award certificate lightbox
+(() => {
+    "use strict";
+
+    const dialog = document.getElementById("award-lightbox");
+    const image = dialog?.querySelector("figure img");
+    const caption = document.getElementById("award-lightbox-caption");
+    const closeButton = dialog?.querySelector(".award-lightbox-close");
+    const triggers = [...document.querySelectorAll(".award-lightbox-trigger")];
+    if (!dialog || !image || !caption || !closeButton || !triggers.length) return;
+
+    let activeTrigger = null;
+
+    function languageSuffix() {
+        const language = document.documentElement.dataset.language || "en";
+        return language.charAt(0).toUpperCase() + language.slice(1);
+    }
+
+    function updateContent(trigger) {
+        const sourceImage = trigger.querySelector("img");
+        image.src = trigger.dataset.lightboxSrc || sourceImage?.src || "";
+        image.alt = sourceImage?.alt || "";
+        caption.textContent = trigger.dataset[`caption${languageSuffix()}`] || "";
+    }
+
+    function openLightbox(trigger) {
+        activeTrigger = trigger;
+        updateContent(trigger);
+        dialog.showModal();
+        document.body.classList.add("lightbox-open");
+        closeButton.focus();
+    }
+
+    function closeLightbox() {
+        if (dialog.open) dialog.close();
+    }
+
+    triggers.forEach(trigger => trigger.addEventListener("click", () => openLightbox(trigger)));
+    closeButton.addEventListener("click", closeLightbox);
+    dialog.addEventListener("click", event => {
+        if (event.target === dialog) closeLightbox();
+    });
+    dialog.addEventListener("close", () => {
+        document.body.classList.remove("lightbox-open");
+        image.removeAttribute("src");
+        activeTrigger?.focus();
+        activeTrigger = null;
+    });
+    window.addEventListener("portfolio:languagechange", () => {
+        if (activeTrigger && dialog.open) updateContent(activeTrigger);
+    });
+})();
