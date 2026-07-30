@@ -163,3 +163,40 @@
         if (activeTrigger && dialog.open) updateContent(activeTrigger);
     });
 })();
+// Case study section navigation
+(() => {
+    "use strict";
+
+    const index = document.querySelector(".case-index");
+    if (!index) return;
+
+    const links = [...index.querySelectorAll('a[href^="#"]')];
+    const sections = links
+        .map(link => document.querySelector(link.getAttribute("href")))
+        .filter(Boolean);
+    let ticking = false;
+
+    function update() {
+        const marker = Math.min(window.innerHeight * 0.32, 230);
+        let current = sections[0]?.id;
+        sections.forEach(section => {
+            if (section.getBoundingClientRect().top <= marker) current = section.id;
+        });
+        links.forEach(link => {
+            const active = link.getAttribute("href") === `#${current}`;
+            if (active) link.setAttribute("aria-current", "true");
+            else link.removeAttribute("aria-current");
+        });
+        ticking = false;
+    }
+
+    function requestUpdate() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(update);
+    }
+
+    window.addEventListener("scroll", requestUpdate, { passive: true });
+    window.addEventListener("resize", requestUpdate);
+    update();
+})();
