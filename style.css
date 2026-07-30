@@ -1264,6 +1264,7 @@ body.lightbox-open { overflow:hidden; }
 .case-study .flow-row span { min-width:max-content; border-color:var(--case-line); background:var(--case-soft); color:var(--case-accent-dark); }
 .case-study .tag-list span { border-color:var(--case-line); background:var(--case-soft); color:var(--case-accent-dark); }
 .case-study .detail-cta { color:#fff; background:radial-gradient(circle at 90% 0%,rgba(255,255,255,.17),transparent 17rem),linear-gradient(135deg,var(--case-accent-dark),var(--case-accent)); border-color:transparent; }
+.case-study .detail-cta h2 { margin-inline:auto; }
 .case-study .detail-cta .eyebrow,.case-study .detail-cta h2,.case-study .detail-cta p { color:#fff; }
 .case-study .detail-cta .button { border-color:#fff; background:#fff; color:var(--case-accent-dark); }
 .next-case { min-height:150px; padding:32px clamp(26px,5vw,52px); display:flex; flex-direction:column; justify-content:center; gap:6px; overflow:hidden; border:1px solid var(--case-line); border-radius:25px; background:linear-gradient(135deg,#fff,var(--case-soft)); text-decoration:none; position:relative; transition:transform .22s ease,box-shadow .22s ease; }
