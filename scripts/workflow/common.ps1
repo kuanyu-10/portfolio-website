@@ -28,7 +28,24 @@ function Get-WorkflowVersion {
         $state = Read-WorkflowJson -Path $statePath
         if ($state.workflowVersion) { return [string]$state.workflowVersion }
     }
-    return '0.1.0'
+    return '0.3.0'
+}
+function ConvertTo-WorkflowStatusZhTw {
+    param([AllowEmptyString()][string]$Status)
+
+    $labels = @{
+        'READY' = '就緒'; 'PASS' = '通過'; 'FAIL' = '失敗'; 'FAILED' = '失敗'
+        'BLOCKED' = '受阻'; 'NOT_CONFIGURED' = '尚未設定'; 'NOT_AVAILABLE' = '不可用'
+        'NOT_TESTED' = '尚未測試'; 'NOT_REQUIRED' = '不需要'; 'NOT_CREATED' = '未建立'
+        'NOT_PUSHED' = '未推送'; 'PUSHED' = '已推送'; 'CREATED' = '已建立'
+        'COPIED_TO_BACKUP' = '已複製至備份'; 'IN_PROGRESS' = '進行中'; 'HANDOFF_READY' = '可交接'
+        'VALIDATION_FAILED' = '驗證失敗'; 'NO_SOURCES' = '沒有來源'; 'DRAFT_CREATED' = '草稿已建立'
+        'AUTO_REVIEWED' = '低風險已自動審核'; 'REVIEW_REQUIRED' = '需要快速審核'; 'APPROVED' = '已通過審核'
+        'SKIPPED' = '已略過'; 'UNKNOWN' = '未知'; 'DRY_RUN' = '模擬執行'; 'UNINITIALIZED' = '尚未初始化'; 'PREVIEW' = '預覽'; 'NO_CHANGES' = '沒有變更'; 'CONFIGURED' = '已設定'; 'SOURCE_UPDATED' = '來源已更新'; 'REGISTERED' = '已登錄'; 'PARTIAL' = '部分完成'
+    }
+    if ($labels.ContainsKey($Status)) { return [string]$labels[$Status] }
+    if ([string]::IsNullOrWhiteSpace($Status)) { return '未提供' }
+    return '未定義狀態'
 }
 
 function Resolve-WorkflowProjectRoot {
@@ -126,12 +143,10 @@ function Invoke-WorkflowGit {
 
     $previousLocation = Get-Location
     $previousErrorActionPreference = $ErrorActionPreference
-    $previousOutputEncoding = [Console]::OutputEncoding
     try {
         if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
             throw 'Git executable was not found on PATH.'
         }
-        [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
         Set-Location -LiteralPath $ProjectRoot
         $ErrorActionPreference = 'Continue'
         $outputLines = @(& git @Arguments 2>&1 | ForEach-Object { $_.ToString() })
@@ -143,7 +158,6 @@ function Invoke-WorkflowGit {
         $output = $_.Exception.Message
     }
     finally {
-        [Console]::OutputEncoding = $previousOutputEncoding
         $ErrorActionPreference = $previousErrorActionPreference
         Set-Location -LiteralPath $previousLocation
     }
@@ -210,8 +224,8 @@ function Get-WorkflowGitStatus {
     $commitResult = Invoke-WorkflowGit -ProjectRoot $ProjectRoot -Arguments @('rev-parse', 'HEAD') -AllowFailure
     $remoteResult = Invoke-WorkflowGit -ProjectRoot $ProjectRoot -Arguments @('remote', 'get-url', 'origin') -AllowFailure
     $upstreamResult = Invoke-WorkflowGit -ProjectRoot $ProjectRoot -Arguments @('rev-parse', '--abbrev-ref', '--symbolic-full-name', '@{u}') -AllowFailure
-    $statusResult = Invoke-WorkflowGit -ProjectRoot $ProjectRoot -Arguments @('status', '--short', '--branch') -AllowFailure
-    $porcelainResult = Invoke-WorkflowGit -ProjectRoot $ProjectRoot -Arguments @('status', '--porcelain') -AllowFailure
+    $statusResult = Invoke-WorkflowGit -ProjectRoot $ProjectRoot -Arguments @('-c', 'core.quotePath=false', 'status', '--short', '--branch') -AllowFailure
+    $porcelainResult = Invoke-WorkflowGit -ProjectRoot $ProjectRoot -Arguments @('-c', 'core.quotePath=false', 'status', '--porcelain') -AllowFailure
 
     $hasUpstream = ($upstreamResult.ExitCode -eq 0 -and -not [string]::IsNullOrWhiteSpace($upstreamResult.Output))
     $ahead = 0
@@ -350,4 +364,29 @@ function Add-WorkflowGitIgnoreRules {
         Write-WorkflowAtomicText -Path $TargetPath -Content $content
     }
     return $true
+}
+
+function Get-WorkflowKnowledgeProfile {
+    param([string]$ProjectRoot,$Config=$null)
+    if(-not $Config){$Config=Get-WorkflowConfig -ProjectRoot $ProjectRoot}
+    $allowed=@('game','website','web-application','tool','general')
+    $type=''
+    if($Config-and$Config.PSObject.Properties['knowledgeProfile']-and$Config.knowledgeProfile.PSObject.Properties['projectType']){
+        $type=([string]$Config.knowledgeProfile.projectType).Trim().ToLowerInvariant()
+    }
+    if([string]::IsNullOrWhiteSpace($type)){
+        return [pscustomobject]@{status='BLOCKED';projectType='';sections=@();forbiddenSections=@();message='尚未設定 knowledgeProfile.projectType；為避免跨專案內容混入，本次停止整理。'}
+    }
+    if($allowed-notcontains$type){
+        return [pscustomobject]@{status='BLOCKED';projectType=$type;sections=@();forbiddenSections=@();message="不支援的專案類型：$type。允許值：$($allowed -join ', ')。"}
+    }
+    $sections=switch($type){
+        'game' {@('專案介紹','故事與世界觀','角色與 NPC','魔物','招式與戰鬥','城鎮與場景','系統與玩法','物品裝備','目前進度','優化與建議')}
+        'website' {@('專案介紹','網站目標','頁面與內容','使用流程','介面與導覽','部署與維護','目前進度','優化與建議')}
+        'web-application' {@('專案介紹','產品功能','帳號與權限','資料流程','外部整合','操作方式','部署與維護','目前進度','優化與建議')}
+        'tool' {@('專案介紹','工具用途','安裝與設定','指令與流程','安全界線','外部整合','維護與疑難排解','目前進度','優化與建議')}
+        default {@('專案介紹','主要內容','目前進度','優化與建議','待處理事項')}
+    }
+    $forbidden=$(if($type-eq'game'){@()}else{@('故事與世界觀','角色與 NPC','魔物','招式與戰鬥','城鎮與場景','物品裝備')})
+    [pscustomobject]@{status='READY';projectType=$type;sections=@($sections);forbiddenSections=@($forbidden);message=''}
 }

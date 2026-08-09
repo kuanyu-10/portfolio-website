@@ -1,4 +1,4 @@
-# Codex Project Rules
+﻿# Codex Project Rules
 
 ## Project Identity
 
@@ -52,7 +52,8 @@ Codex 每次開始正式工作前必須依序讀取：
 
 - `開`：執行開工流程。先讀取 `AGENTS.md`、`HANDOFF.md`、`PROJECT_STATE.json`，再執行 `scripts/workflow/startup.ps1 -ApplySafePull`。只有安全條件全部成立時才可 fast-forward pull；確認狀態前不得修改正式內容。
 - `收`：執行正式收工流程。驗證、更新交接狀態、檢查敏感與大型檔案，然後依設定安全 commit、push 與建立 handoff package。
-- `換`：準備換電腦。執行完整正式收工、push、建立 handoff package，並在已設定時複製外部備份；最後回報 branch、commit SHA、push、validation、ZIP、SHA256、備份狀態與新電腦接續方式。
+- `換`：準備換電腦。執行完整正式收工、push、建立 handoff package，並在已設定時複製外部備份；最後回報 branch、commit SHA、push、validation、ZIP、SHA256、備份狀態與新電腦接續方式。
+- `整`：強制蒐集安全的真實來源、產生白話摘要並執行規則式風險檢查；低風險內容自動發布到 Obsidian、單向同步 Google Drive，並更新工作流專屬的 NotebookLM 管理來源；高風險異常只隔離、不上傳。
 
 短口令只縮短使用者輸入，不會放寬任何驗證、Git、敏感資料或失敗回報規則。
 
@@ -128,3 +129,14 @@ Package 狀態：`NOT_CREATED`、`CREATED`、`COPIED_TO_BACKUP`、`FAILED`。
 ## Project-Specific Rules
 
 <!-- 在此追加專案專屬規則。保留上方通用安全規則。 -->
+
+## Project Type Isolation
+
+- 執行整或全整前，必須讀取 workflow.config.json 的 knowledgeProfile.projectType。缺少或不支援時回報 BLOCKED，不得猜測類型或產生正式筆記。
+- game：可整理故事與世界觀、角色與 NPC、魔物、招式與戰鬥、城鎮與場景、系統與玩法、物品裝備。
+- website：只整理網站目標、頁面與內容、使用流程、介面、搜尋與導覽、部署與維護；禁止遊戲分類。
+- web-application：只整理產品功能、帳號權限、資料流程、外部整合、操作方式、部署與維護；禁止遊戲分類。
+- tool：只整理工具用途、安裝設定、指令流程、安全界線、整合服務、維護與疑難排解；禁止遊戲分類。
+- general：使用專案介紹、主要內容、目前進度、優化與建議、待處理事項；禁止遊戲分類。
+- 每份正式總覽必須是白話文，固定更新專案總覽.md，不建立日期副本，不顯示雜湊、來源數量、程式檔清單或內部分類索引。
+- 分類規則只來自目前專案的 projectType。不得因其他專案、共用模板、NotebookLM 或 Agent 記憶而混入不相關領域。
