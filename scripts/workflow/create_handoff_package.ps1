@@ -47,7 +47,7 @@ try {
 
     $candidateRelativePaths = New-Object System.Collections.ArrayList
     if ((Test-WorkflowGitRepository -ProjectRoot $root) -and -not $useIgnoredFiles) {
-        $trackedResult = Invoke-WorkflowGit -ProjectRoot $root -Arguments @('ls-files', '-co', '--exclude-standard')
+        $trackedResult = Invoke-WorkflowGit -ProjectRoot $root -Arguments @('-c', 'core.quotepath=false', 'ls-files', '-co', '--exclude-standard')
         foreach ($line in ($trackedResult.Output -split "`r?`n")) {
             if (-not [string]::IsNullOrWhiteSpace($line)) { [void]$candidateRelativePaths.Add($line.Replace('\', '/')) }
         }

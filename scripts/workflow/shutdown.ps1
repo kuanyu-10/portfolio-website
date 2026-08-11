@@ -386,12 +386,15 @@ try {
         $packageExit = $LASTEXITCODE
         try { $packageResult = (($packageRaw -join [Environment]::NewLine) | ConvertFrom-Json) }
         catch { throw "Could not parse package output: $($packageRaw -join ' ')" }
-        $packageStatus = [string]$packageResult.status
-        $zipPath = [string]$packageResult.zipPath
-        $zipSha256 = [string]$packageResult.zipSha256
-        $backupStatus = [string]$packageResult.backupStatus
+        if ($packageResult.PSObject.Properties['status']) { $packageStatus = [string]$packageResult.status }
+        if ($packageResult.PSObject.Properties['zipPath']) { $zipPath = [string]$packageResult.zipPath }
+        if ($packageResult.PSObject.Properties['zipSha256']) { $zipSha256 = [string]$packageResult.zipSha256 }
+        if ($packageResult.PSObject.Properties['backupStatus']) { $backupStatus = [string]$packageResult.backupStatus }
         if ($packageExit -ne 0) {
             if ($packageStatus -ne 'CREATED') { $packageStatus = 'FAILED' }
+            if ($packageResult.PSObject.Properties['error'] -and $packageResult.error) {
+                [void]$warnings.Add("交接包失敗：$($packageResult.error)")
+            }
             [void]$warnings.Add("交接包或備份操作回傳 exit code：$packageExit。")
         }
         elseif ($backupStatus -eq 'COPIED_TO_BACKUP') {
