@@ -1,0 +1,15 @@
+{
+    "schemaVersion":  1,
+    "projectId":  "portfolio-website",
+    "projectType":  "website",
+    "sections":  {
+                     "progress":  [
+                                      "多語作品集已能呈現資訊專案交付、專案管理、商業系統規劃與數位轉型能力。"
+                                  ],
+                     "typeSections":  {
+                                          "介面":  [
+                                                     "訪客可切換語言，並從首頁與作品區快速理解專業方向。"
+                                                 ]
+                                      }
+                 }
+}

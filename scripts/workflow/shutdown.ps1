@@ -178,6 +178,40 @@ try {
     $validationStatus = [string]$validation.status
 
     $warnings = New-Object System.Collections.ArrayList
+    $pendingKnowledgeDrafts = 0
+    $vaultGitStatus = 'NOT_CONFIGURED'
+    $vaultGit = $null
+    if ($config -and $config.PSObject.Properties['knowledgeIntegration']) {
+        $knowledgeConfig = $config.knowledgeIntegration
+        if ($knowledgeConfig.PSObject.Properties['digest'] -and $knowledgeConfig.digest.enabled -eq $true -and
+            $knowledgeConfig.PSObject.Properties['obsidian'] -and $knowledgeConfig.obsidian.enabled -eq $true) {
+            try {
+                $vaultPath = [IO.Path]::GetFullPath([string]$knowledgeConfig.obsidian.vaultPath).TrimEnd('\')
+                $configuredDraftPath = [string]$knowledgeConfig.digest.draftDirectoryPath
+                $draftPath = $(if ([IO.Path]::IsPathRooted($configuredDraftPath)) {
+                    [IO.Path]::GetFullPath($configuredDraftPath)
+                }
+                else {
+                    [IO.Path]::GetFullPath((Join-Path $vaultPath $configuredDraftPath))
+                })
+                if ($draftPath -ne $vaultPath -and -not $draftPath.StartsWith(($vaultPath + '\'), [StringComparison]::OrdinalIgnoreCase)) {
+                    throw '草稿目錄位於 Obsidian Vault 外。'
+                }
+                if (Test-Path -LiteralPath $draftPath -PathType Container) {
+                    foreach ($draftFile in @(Get-ChildItem -LiteralPath $draftPath -Filter '*.md' -File -Recurse)) {
+                        $draftText = Get-Content -LiteralPath $draftFile.FullName -Raw -Encoding UTF8
+                        if ($draftText -match '(?m)^status:\s*draft\s*$') { $pendingKnowledgeDrafts++ }
+                    }
+                }
+                if ($pendingKnowledgeDrafts -gt 0) {
+                    [void]$warnings.Add("有 $pendingKnowledgeDrafts 份高風險知識草稿需要處理；請執行「審核」，確認後回覆「通過」或「略過」。")
+                }
+            }
+            catch {
+                [void]$warnings.Add("無法檢查待核對知識草稿：$($_.Exception.Message)")
+            }
+        }
+    }
     $excludedFromAdd = New-Object System.Collections.ArrayList
     $safeFiles = New-Object System.Collections.ArrayList
     $maximumSize = 50
@@ -187,7 +221,7 @@ try {
     $protectedPaths = @()
     if ($config -and $config.protectedPaths) { $protectedPaths = @($config.protectedPaths) }
 
-    $status = Invoke-WorkflowGit -ProjectRoot $root -Arguments @('status', '--porcelain')
+    $status = Invoke-WorkflowGit -ProjectRoot $root -Arguments @('-c', 'core.quotepath=false', 'status', '--porcelain')
     foreach ($line in ($status.Output -split "`r?`n")) {
         if ([string]::IsNullOrWhiteSpace($line) -or $line.Length -lt 4) { continue }
         $relative = $line.Substring(3).Trim()
@@ -195,18 +229,18 @@ try {
         $relative = $relative.Trim('"').Replace('\', '/')
         $fullPath = Join-Path $root ($relative.Replace('/', '\'))
         $reason = ''
-        if (Test-WorkflowSensitivePath -RelativePath $relative) { $reason = 'sensitive or conflict file' }
+        if (Test-WorkflowSensitivePath -RelativePath $relative) { $reason = '敏感檔案或衝突副本' }
         foreach ($protected in $protectedPaths) {
-            if ($relative -like [string]$protected) { $reason = "protected path: $protected"; break }
+            if ($relative -like [string]$protected) { $reason = "受保護路徑：$protected"; break }
         }
         if (-not $reason -and (Test-Path -LiteralPath $fullPath -PathType Leaf)) {
             $size = Get-WorkflowFileSizeMB -Path $fullPath
-            if ($size -gt $maximumSize) { $reason = "larger than automatic add limit ($maximumSize MB)" }
-            elseif (-not (Test-WorkflowKnownSourceFile -Path $fullPath)) { $reason = 'unknown binary or file type' }
+            if ($size -gt $maximumSize) { $reason = "超過自動加入上限（$maximumSize MB）" }
+            elseif (-not (Test-WorkflowKnownSourceFile -Path $fullPath)) { $reason = '未知二進位或檔案類型' }
         }
         if ($reason) {
             [void]$excludedFromAdd.Add([pscustomobject]@{ path = $relative; reason = $reason })
-            [void]$warnings.Add("Not staged: $relative ($reason)")
+            [void]$warnings.Add("未加入 stage：$relative（$reason）")
         }
         else {
             [void]$safeFiles.Add($relative)
@@ -214,16 +248,23 @@ try {
     }
 
     if ($validationStatus -eq 'FAIL' -or $validationStatus -eq 'BLOCKED') {
-        [void]$warnings.Add("Validation status is $validationStatus (exit code $validationExitCode).")
+        [void]$warnings.Add("驗證狀態為 $validationStatus（exit code：$validationExitCode）。")
     }
     elseif ($validationStatus -eq 'NOT_CONFIGURED') {
-        [void]$warnings.Add('Validation is NOT_CONFIGURED; this is not PASS.')
+        [void]$warnings.Add('驗證狀態是 NOT_CONFIGURED（尚未設定），不能視為 PASS。')
     }
 
     $initialPushStatus = $(if ($NoPush -or $NoCommit) { 'NOT_REQUIRED' } else { 'NOT_PUSHED' })
     Write-ShutdownStateFiles -Root $root -State $state -Git $git -ValidationStatus $validationStatus `
         -PushStatus $initialPushStatus -PackageStatus 'NOT_CREATED' -Warnings @($warnings) -DryRun:$DryRun
 
+    if ($DryRun -and $config -and $config.PSObject.Properties['knowledgeIntegration'] -and
+        $config.knowledgeIntegration.obsidian.PSObject.Properties['gitSync'] -and $config.knowledgeIntegration.obsidian.gitSync.enabled -eq $true) {
+        $vaultScript = Join-Path $PSScriptRoot 'sync_obsidian_vault_git.ps1'
+        $vaultRaw = @(& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $vaultScript -ProjectPath $root -Mode Shutdown -DryRun -Json 2>&1 | ForEach-Object { $_.ToString() })
+        try { $vaultGit = (($vaultRaw -join [Environment]::NewLine) | ConvertFrom-Json); $vaultGitStatus = [string]$vaultGit.status }
+        catch { $vaultGitStatus = 'BLOCKED'; [void]$warnings.Add('Vault Git 收工預覽輸出無法解析。') }
+    }
     if ($DryRun) {
         $dryResult = [pscustomobject]@{
             status = 'DRY_RUN'
@@ -236,14 +277,18 @@ try {
             zipSha256 = ''
             backupStatus = 'NOT_REQUIRED'
             excludedFromAdd = @($excludedFromAdd)
+            pendingKnowledgeDrafts = $pendingKnowledgeDrafts
+            vaultGitStatus = $vaultGitStatus
+            vaultGit = $vaultGit
             warnings = @($warnings)
         }
         Write-WorkflowOutput -Value $dryResult -Json:$Json -TextLines @(
-            'Shutdown Status: DRY_RUN',
-            "Validation: $validationStatus",
-            'Commit: NOT_CREATED',
-            'Push: NOT_REQUIRED',
-            'Package: NOT_CREATED'
+            '收工狀態：DRY_RUN（模擬執行）',
+            "驗證：$validationStatus（$(ConvertTo-WorkflowStatusZhTw $validationStatus)）",
+            'Commit：NOT_CREATED（未建立）',
+            '推送：NOT_REQUIRED（不需要）',
+            '交接包：NOT_CREATED（未建立）',
+            "⚠ 注意事項：$(if ($warnings.Count -eq 0) { '無。' } else { $warnings -join ' | ' })"
         )
         exit 0
     }
@@ -258,12 +303,16 @@ try {
             pushStatus = 'NOT_REQUIRED'
             packageStatus = 'NOT_CREATED'
             excludedFromAdd = @($excludedFromAdd)
+            pendingKnowledgeDrafts = $pendingKnowledgeDrafts
+            vaultGitStatus = $vaultGitStatus
+            vaultGit = $vaultGit
             warnings = @($warnings)
         }
         Write-WorkflowOutput -Value $blockedResult -Json:$Json -TextLines @(
-            'Shutdown Status: VALIDATION_FAILED',
-            "Validation: $validationStatus",
-            'No commit, push, or package was performed. Use -AllowValidationFailure only for an explicit diagnostic handoff.'
+            '收工狀態：VALIDATION_FAILED（驗證失敗）',
+            "驗證：$validationStatus（$(ConvertTo-WorkflowStatusZhTw $validationStatus)）",
+            '未執行 commit、push 或建立交接包。只有明確進行診斷性交接時才可使用 -AllowValidationFailure。',
+            "⚠ 注意事項：$($warnings -join ' | ')"
         )
         exit $validationExitCode
     }
@@ -302,7 +351,7 @@ try {
         $postCommitGit = Get-WorkflowGitStatus -ProjectRoot $root
         if (-not $postCommitGit.HasUpstream) {
             $pushStatus = 'FAILED'
-            [void]$warnings.Add('Push was requested but the current branch has no upstream.')
+            [void]$warnings.Add('已要求 push，但目前分支沒有 upstream。')
         }
         else {
             $pushResult = Invoke-WorkflowGit -ProjectRoot $root -Arguments @('push') -AllowFailure
@@ -313,12 +362,12 @@ try {
                 }
                 else {
                     $pushStatus = 'FAILED'
-                    [void]$warnings.Add('Push returned success but remote commit verification did not match.')
+                    [void]$warnings.Add('Push 命令回報成功，但遠端 commit 驗證不一致。')
                 }
             }
             else {
                 $pushStatus = 'FAILED'
-                [void]$warnings.Add("Push failed: $($pushResult.Output)")
+                [void]$warnings.Add("Push 失敗：$($pushResult.Output)")
             }
         }
     }
@@ -343,13 +392,24 @@ try {
         $backupStatus = [string]$packageResult.backupStatus
         if ($packageExit -ne 0) {
             if ($packageStatus -ne 'CREATED') { $packageStatus = 'FAILED' }
-            [void]$warnings.Add("Package or backup operation returned exit code $packageExit.")
+            [void]$warnings.Add("交接包或備份操作回傳 exit code：$packageExit。")
         }
         elseif ($backupStatus -eq 'COPIED_TO_BACKUP') {
             $packageStatus = 'COPIED_TO_BACKUP'
         }
     }
 
+    if ($config -and $config.PSObject.Properties['knowledgeIntegration'] -and
+        $config.knowledgeIntegration.obsidian.PSObject.Properties['gitSync'] -and $config.knowledgeIntegration.obsidian.gitSync.enabled -eq $true) {
+        if ($NoCommit -or $NoPush) { $vaultGitStatus = 'NOT_REQUIRED' }
+        else {
+            $vaultScript = Join-Path $PSScriptRoot 'sync_obsidian_vault_git.ps1'
+            $vaultRaw = @(& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $vaultScript -ProjectPath $root -Mode Shutdown -Json 2>&1 | ForEach-Object { $_.ToString() })
+            try { $vaultGit = (($vaultRaw -join [Environment]::NewLine) | ConvertFrom-Json); $vaultGitStatus = [string]$vaultGit.status }
+            catch { $vaultGitStatus = 'BLOCKED'; [void]$warnings.Add('Vault Git 收工同步輸出無法解析。') }
+            if ($vaultGitStatus -eq 'BLOCKED') { foreach ($item in @($vaultGit.uncertainties)) { if ($item) { [void]$warnings.Add("Vault Git：$item") } } }
+        }
+    }
     $finalGit = Get-WorkflowGitStatus -ProjectRoot $root
     Write-ShutdownStateFiles -Root $root -State $state -Git $finalGit -ValidationStatus $validationStatus `
         -PushStatus $pushStatus -PackageStatus $packageStatus -Warnings @($warnings)
@@ -368,7 +428,7 @@ try {
                 $metadataPush = Invoke-WorkflowGit -ProjectRoot $root -Arguments @('push') -AllowFailure
                 if ($metadataPush.ExitCode -ne 0) {
                     $pushStatus = 'FAILED'
-                    [void]$warnings.Add("Final metadata push failed: $($metadataPush.Output)")
+                    [void]$warnings.Add("最終 metadata push 失敗：$($metadataPush.Output)")
                 }
             }
         }
@@ -378,7 +438,7 @@ try {
     if ($validationStatus -eq 'FAIL') { $overallStatus = 'VALIDATION_FAILED' }
     elseif ($validationStatus -eq 'BLOCKED') { $overallStatus = 'BLOCKED' }
     elseif ($validationStatus -eq 'NOT_CONFIGURED') { $overallStatus = 'IN_PROGRESS' }
-    if ($pushStatus -eq 'FAILED' -or $packageStatus -eq 'FAILED') { $overallStatus = 'BLOCKED' }
+    if ($pushStatus -eq 'FAILED' -or $packageStatus -eq 'FAILED' -or $vaultGitStatus -eq 'BLOCKED') { $overallStatus = 'BLOCKED' }
 
     $result = [pscustomobject]@{
         status = $overallStatus
@@ -392,18 +452,22 @@ try {
         zipSha256 = $zipSha256
         backupStatus = $backupStatus
         excludedFromAdd = @($excludedFromAdd)
+        pendingKnowledgeDrafts = $pendingKnowledgeDrafts
+        vaultGitStatus = $vaultGitStatus
+        vaultGit = $vaultGit
         warnings = @($warnings)
     }
     Write-WorkflowOutput -Value $result -Json:$Json -TextLines @(
-        "Shutdown Status: $overallStatus",
-        "Validation: $validationStatus",
-        "Commit: $commitSha",
-        "Push: $pushStatus",
-        "Package: $packageStatus",
+        "收工狀態：$overallStatus（$(ConvertTo-WorkflowStatusZhTw $overallStatus)）",
+        "驗證：$validationStatus（$(ConvertTo-WorkflowStatusZhTw $validationStatus)）",
+        "Commit：$commitSha",
+        "推送：$pushStatus（$(ConvertTo-WorkflowStatusZhTw $pushStatus)）",
+        "交接包：$packageStatus（$(ConvertTo-WorkflowStatusZhTw $packageStatus)）",
         "ZIP: $zipPath",
         "ZIP SHA256: $zipSha256",
-        "Backup: $backupStatus",
-        "Warnings: $($warnings -join ' | ')"
+        "備份：$backupStatus（$(ConvertTo-WorkflowStatusZhTw $backupStatus)）",
+        "Vault Git：$vaultGitStatus（$(ConvertTo-WorkflowStatusZhTw $vaultGitStatus)）",
+        "⚠ 注意事項：$(if ($warnings.Count -eq 0) { '無。' } else { $warnings -join ' | ' })"
     )
     if ($overallStatus -eq 'BLOCKED') { exit 1 }
     if ($validationStatus -eq 'FAIL' -or $validationStatus -eq 'BLOCKED') { exit $validationExitCode }
@@ -417,6 +481,6 @@ catch {
         pushStatus = 'FAILED'
         packageStatus = 'FAILED'
     }
-    Write-WorkflowOutput -Value $failure -Json:$Json -TextLines @('Shutdown Status: BLOCKED', "Error: $($_.Exception.Message)")
+    Write-WorkflowOutput -Value $failure -Json:$Json -TextLines @('收工狀態：BLOCKED（受阻）', "⚠ 目前限制：$($_.Exception.Message)")
     exit 1
 }

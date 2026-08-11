@@ -12,7 +12,15 @@ param(
 $ErrorActionPreference = 'Continue'
 . (Join-Path $PSScriptRoot 'common.ps1')
 $root = Resolve-WorkflowProjectRoot -ProjectPath $ProjectPath
-$steps = New-Object System.Collections.ArrayList
+# codex-knowledge-publisher bridge: keep the legacy flow below as fallback.
+$knowledgePublisherBridge = Join-Path $PSScriptRoot 'invoke_knowledge_publisher.ps1'
+if ($Command -in @('整','全整') -and (Test-Path -LiteralPath $knowledgePublisherBridge -PathType Leaf)) {
+    $bridgeArgs = @('-Command',$Command,'-ProjectPath',$root)
+    if ($Preview) { $bridgeArgs += '-Preview' }
+    if ($Json) { $bridgeArgs += '-Json' }
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $knowledgePublisherBridge @bridgeArgs
+    exit $LASTEXITCODE
+}$steps = New-Object System.Collections.ArrayList
 $warnings = New-Object System.Collections.ArrayList
 if($Command-eq'全整'){
     $config=Get-WorkflowConfig -ProjectRoot $root

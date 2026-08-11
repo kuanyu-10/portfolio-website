@@ -90,9 +90,9 @@ $result = [pscustomobject]@{
     logPath = $logPath
 }
 Write-WorkflowOutput -Value $result -Json:$Json -TextLines @(
-    "Validation Status: $status",
-    "Exit Code: $actualExitCode",
-    "Summary: $summary",
-    "Log: $logPath"
+    "驗證狀態：$status（$(ConvertTo-WorkflowStatusZhTw $status)）",
+    "結束代碼：$actualExitCode",
+    "摘要：$summary",
+    "紀錄檔：$logPath"
 )
 exit $actualExitCode

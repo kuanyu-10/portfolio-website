@@ -147,17 +147,17 @@ try {
         )
     }
     Write-WorkflowOutput -Value $result -Json:$Json -TextLines @(
-        "Status: $($result.status)",
-        "Project: $($result.projectName)",
-        "Path: $($result.projectPath)",
-        "Created: $($result.created.Count)",
-        "Skipped: $($result.skipped.Count)",
-        'Next: review AGENTS.md and configure project validation.'
+        "狀態：$($result.status)（$(ConvertTo-WorkflowStatusZhTw $result.status)）",
+        "專案：$($result.projectName)",
+        "路徑：$($result.projectPath)",
+        "已建立：$($result.created.Count)",
+        "已略過：$($result.skipped.Count)",
+        '下一步：檢查 AGENTS.md，並設定專案驗證。'
     )
     exit 0
 }
 catch {
     $failure = [pscustomobject]@{ status = 'FAILED'; error = $_.Exception.Message; projectPath = $ProjectPath }
-    Write-WorkflowOutput -Value $failure -Json:$Json -TextLines @("Status: FAILED", "Error: $($_.Exception.Message)")
+    Write-WorkflowOutput -Value $failure -Json:$Json -TextLines @("狀態：FAILED（失敗）", "⚠ 目前限制：$($_.Exception.Message)")
     exit 1
 }

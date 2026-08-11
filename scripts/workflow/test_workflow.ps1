@@ -2,12 +2,13 @@
 param([switch]$Json)
 
 $ErrorActionPreference = 'Stop'
+. (Join-Path $PSScriptRoot 'common.ps1')
 $repositoryRoot = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\..'))
 $testsRoot = Join-Path $repositoryRoot 'tests'
 if (-not (Test-Path -LiteralPath $testsRoot -PathType Container)) {
     $result = [pscustomobject]@{
         status = 'NOT_AVAILABLE'
-        summary = 'The full test suite is available only in the workflow source repository.'
+        summary = '完整測試套件只存在於工作流來源 repository。'
         passed = 0
         failed = 0
     }
@@ -21,6 +22,13 @@ $testScripts = @(
     'test-behind-remote.ps1',
     'test-diverged-branch.ps1',
     'test-package-recursion.ps1',
+    'test-knowledge-integration.ps1',
+    'test-knowledge-collection.ps1',
+    'test-knowledge-digest.ps1',
+    'test-knowledge-automation.ps1',
+    'test-knowledge-drive-sync.ps1',
+    'test-vault-git-sync.ps1',
+    'test-one-click-setup.ps1',
     'test-json-validation.ps1'
 )
 $suiteResults = New-Object System.Collections.ArrayList
@@ -39,8 +47,8 @@ foreach ($testName in $testScripts) {
     [void]$suiteResults.Add($suite)
     if (-not $Json) {
         $mark = $(if ($exitCode -eq 0 -and $suite.failed -eq 0) { 'PASS' } else { 'FAIL' })
-        Write-Output "[$mark] $($suite.suite): $($suite.passed) passed, $($suite.failed) failed"
-        if ($suite.error) { Write-Output "  $($suite.error)" }
+        Write-Output "[$mark] $($suite.suite)：$($suite.passed) 通過，$($suite.failed) 失敗"
+        if ($suite.PSObject.Properties['error'] -and $suite.error) { Write-Output "  $($suite.error)" }
     }
 }
 $passedCases = 0
@@ -60,7 +68,7 @@ if ($Json) {
     $result | ConvertTo-Json -Depth 20 -Compress
 }
 else {
-    Write-Output "Summary: $($result.status) — $passedCases passed, $failedCases failed"
+    Write-Output "總結：$($result.status)（$(ConvertTo-WorkflowStatusZhTw $result.status)）— $passedCases 通過，$failedCases 失敗"
 }
 if ($failedSuites -gt 0) { exit 1 }
 exit 0

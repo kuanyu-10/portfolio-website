@@ -29,7 +29,14 @@ function Add-SkippedStep([string]$Name,[string]$Reason){
 }
 
 $root=Resolve-WorkflowProjectRoot -ProjectPath $ProjectPath
-$scriptRoot=$PSScriptRoot
+# codex-knowledge-publisher bridge: shutdown/device-switch cycles publish and sync centrally.
+$knowledgePublisherBridge = Join-Path $PSScriptRoot 'invoke_knowledge_publisher.ps1'
+if (Test-Path -LiteralPath $knowledgePublisherBridge -PathType Leaf) {
+    $bridgeArgs = @('-Command','整','-ProjectPath',$root,'-SyncAfterPublish','-Json')
+    if ($Preview) { $bridgeArgs += '-Preview' }
+    & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $knowledgePublisherBridge @bridgeArgs
+    exit $LASTEXITCODE
+}$scriptRoot=$PSScriptRoot
 $config=Get-WorkflowConfig -ProjectRoot $root
 $profile=Get-WorkflowKnowledgeProfile -ProjectRoot $root -Config $config
 if($profile.status-ne'READY'){

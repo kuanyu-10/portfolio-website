@@ -230,14 +230,14 @@ try {
         backupError = $backupError
     }
     Write-WorkflowOutput -Value $result -Json:$Json -TextLines @(
-        "Package Status: $packageStatus",
-        "Directory: $stagingPath",
+        "交接包狀態：$packageStatus（$(ConvertTo-WorkflowStatusZhTw $packageStatus)）",
+        "暫存目錄：$stagingPath",
         "ZIP: $zipPath",
         "ZIP SHA256: $zipSha256",
-        "Files: $($included.Count)",
-        "Excluded: $($excluded.Count)",
-        "Backup Status: $backupStatus",
-        $(if ($backupError) { "Backup Error: $backupError" } else { 'Backup Error: None' })
+        "包含檔案：$($included.Count)",
+        "排除檔案：$($excluded.Count)",
+        "備份狀態：$backupStatus（$(ConvertTo-WorkflowStatusZhTw $backupStatus)）",
+        $(if ($backupError) { "⚠ 注意事項：備份錯誤：$backupError" } else { '⚠ 注意事項：無。' })
     )
     if ($backupStatus -eq 'FAILED') { exit 4 }
     exit 0
@@ -249,6 +249,6 @@ catch {
         zipPath = ''
         backupStatus = 'NOT_REQUIRED'
     }
-    Write-WorkflowOutput -Value $failure -Json:$Json -TextLines @('Package Status: FAILED', "Error: $($_.Exception.Message)")
+    Write-WorkflowOutput -Value $failure -Json:$Json -TextLines @('交接包狀態：FAILED（失敗）', "⚠ 目前限制：$($_.Exception.Message)")
     exit 1
 }

@@ -699,3 +699,210 @@
 
 - Computer: DESKTOP-IK99ESK
 - Workflow version: 0.1.0
+## 2026-08-02 02:23 —  / HANDOFF_READY
+
+### Changed
+
+- 更新正式交接狀態。
+
+### Validation
+
+- PASS
+
+### Decisions
+
+- 依工作流安全規則處理 commit、push 與 package。
+
+### Known Issues
+
+- 未加入 stage：workflow.config.example.json（受保護路徑：workflow.config.example.json）
+
+### Git
+
+- Branch: main
+- Base commit: 7a708281cf02613de945a58966780a60ca761a52
+- Push status: NOT_REQUIRED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
+## 2026-08-02 02:23 —  / HANDOFF_READY
+
+### Changed
+
+- 更新正式交接狀態。
+
+### Validation
+
+- PASS
+
+### Decisions
+
+- 依工作流安全規則處理 commit、push 與 package。
+
+### Known Issues
+
+- 未加入 stage：workflow.config.example.json（受保護路徑：workflow.config.example.json）
+
+### Git
+
+- Branch: main
+- Base commit: 7a708281cf02613de945a58966780a60ca761a52
+- Push status: NOT_REQUIRED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
+## 2026-08-02 02:27 —  / HANDOFF_READY
+
+### Changed
+
+- 更新正式交接狀態。
+
+### Validation
+
+- PASS
+
+### Decisions
+
+- 依工作流安全規則處理 commit、push 與 package。
+
+### Known Issues
+
+- 未加入 stage：workflow.config.example.json（受保護路徑：workflow.config.example.json）
+
+### Git
+
+- Branch: main
+- Base commit: 7a708281cf02613de945a58966780a60ca761a52
+- Push status: NOT_REQUIRED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
+## 2026-08-02 02:27 —  / HANDOFF_READY
+
+### Changed
+
+- 更新正式交接狀態。
+
+### Validation
+
+- PASS
+
+### Decisions
+
+- 依工作流安全規則處理 commit、push 與 package。
+
+### Known Issues
+
+- 未加入 stage：workflow.config.example.json（受保護路徑：workflow.config.example.json）
+
+### Git
+
+- Branch: main
+- Base commit: 7a708281cf02613de945a58966780a60ca761a52
+- Push status: NOT_REQUIRED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
+
+## 2026-08-11 10:25 — Codex / IN_PROGRESS
+
+### Changed
+
+- 盤點 65 個既有工作樹狀態項目，並在 repo 外保全 52 個通過敏感與大型檔案檢查的檔案。
+- 從 2026-08-01 同版本工作流來源補齊 `scripts/workflow/check_knowledge_tools.ps1`。
+- 改善 startup：選配知識檢查或 Vault Git 腳本缺失、失敗時降級回報，不再中斷 Git 狀態檢查。
+
+### Validation
+
+- PASS：正式專案驗證 exit code 0。
+- PASS：缺少知識檢查腳本時，startup exit 0、整體 READY、知識狀態 BLOCKED，且 Git 狀態欄位完整。
+- PASS：正常 startup 可完成；main ahead 0、behind 0、未分歧。
+
+### Decisions
+
+- 保留所有既有使用者變更；未執行批次 stage、commit、push、pull 或 package。
+- 專案狀態維持 IN_PROGRESS，直到大量工作樹變更與外部知識整合阻礙完成審查。
+
+### Known Issues
+
+- 工作樹仍有 65 個未提交狀態項目。
+- 知識整合為 BLOCKED：Obsidian 專案筆記不可用。
+- Vault Git 為 DIRTY，因此未執行同步 pull。
+- 一個含 email 的命令檔依敏感資料規則未納入修復前快照。
+
+### Git
+
+- Branch: main
+- Base commit: 1bdbd0e453a75713bbcb9b7513b187fdf00d921c
+- Ahead: 0
+- Behind: 0
+- Push status: NOT_PUSHED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
+## 2026-08-11 10:49 —  / HANDOFF_READY
+
+### Changed
+
+- 更新正式交接狀態。
+
+### Validation
+
+- PASS
+
+### Decisions
+
+- 依工作流安全規則處理 commit、push 與 package。
+
+### Known Issues
+
+- 未加入 stage：workflow.config.example.json（受保護路徑：workflow.config.example.json）
+
+### Git
+
+- Branch: main
+- Base commit: 1bdbd0e453a75713bbcb9b7513b187fdf00d921c
+- Push status: NOT_PUSHED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
+## 2026-08-11 10:50 —  / HANDOFF_READY
+
+### Changed
+
+- 更新正式交接狀態。
+
+### Validation
+
+- PASS
+
+### Decisions
+
+- 依工作流安全規則處理 commit、push 與 package。
+
+### Known Issues
+
+- 未加入 stage：workflow.config.example.json（受保護路徑：workflow.config.example.json）
+
+### Git
+
+- Branch: main
+- Base commit: 1bdbd0e453a75713bbcb9b7513b187fdf00d921c
+- Push status: NOT_PUSHED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
