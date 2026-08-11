@@ -112,6 +112,11 @@ try {
         exit 0
     }
     foreach ($relative in @($changed | Sort-Object -Unique)) {
+        $full = Join-Path $vault ($relative.Replace('/', '\'))
+        $indexMatch = Invoke-WorkflowGit -ProjectRoot $vault -Arguments @('ls-files', '--error-unmatch', '--', $relative) -AllowFailure
+        if (-not (Test-Path -LiteralPath $full) -and $indexMatch.ExitCode -ne 0) {
+            continue
+        }
         Invoke-WorkflowGit -ProjectRoot $vault -Arguments @('add', '--', $relative) | Out-Null
     }
     $staged = Invoke-WorkflowGit -ProjectRoot $vault -Arguments @('diff','--cached','--quiet') -AllowFailure
