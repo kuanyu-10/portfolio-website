@@ -1019,3 +1019,43 @@ fatal: pathspec '02_Projects/codex-cross-device-workflow.md' did not match any f
 
 - Computer: DESKTOP-IK99ESK
 - Workflow version: 0.1.0
+
+## 2026-08-27 00:37 — Codex / HANDOFF_READY
+
+### Changed
+
+- 將資格卡左側短標籤由 `N2` 更新為 `N1`。
+- 將資格名稱由 `JLPT N2` 更新為 `JLPT N1`。
+
+### Validation
+
+- PASS：正式專案驗證 exit code 0。
+- PASS：`N1` 短標籤與 `JLPT N1` 各出現一次，`JLPT N2` 無殘留。
+
+### Decisions
+
+- 本次只提交 `index.html` 與正式收工 metadata。
+- 32 個既有工作流升級狀態項目未納入本次 commit 或交接包。
+- 未觸發資料整理、Obsidian、Google Drive、NotebookLM 或知識網站同步。
+
+### Known Issues
+
+- 工作樹仍有本次開始前即存在的工作流升級變更，須另案審查。
+
+### Git
+
+- Branch: main
+- Content commit: a4e2a3ec5077e9dfdd6d7ca683a9ea75008d2a2f
+- Push status: PUSHED
+
+### Package
+
+- Status: CREATED
+- ZIP: portfolio-website_handoff_20260826_153714.zip
+- SHA256: 5b92a2a3d82d95046cf15590fd6bbdbb3806d57e30e736650b2f743774655d90
+- Backup status: NOT_REQUIRED
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0

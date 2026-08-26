@@ -6,7 +6,7 @@ portfolio-website
 
 ## Current Phase
 
-
+Portfolio content maintenance
 
 ## Current Status
 
@@ -14,41 +14,39 @@ HANDOFF_READY
 
 ## Last Completed
 
-已執行正式收工檢查；結果以本文件與 PROJECT_STATE.json 為準。
+已將資格卡的 JLPT N2 更新為 JLPT N1；只修改 `index.html`，完成驗證、限定提交、推送與乾淨 HEAD 交接包。
 
 ## Current Working State
 
-Git working tree: DIRTY。警告：未加入 stage：workflow.config.example.json（受保護路徑：workflow.config.example.json）; 交接包或備份操作回傳 exit code：4。
+本次內容已推送。工作樹仍有 32 個本次開始前即存在的工作流升級相關變更，未納入本次 commit 或交接包。
 
 ## Next Highest-Leverage Tasks
 
-- Review and separate the 65 existing working-tree changes before staging.
-- Resolve the blocked Obsidian project-note check and dirty Vault Git state.
-- Re-run startup and validation after review, then commit and push only approved files.
+- 另行審查並處理既有工作流升級變更。
 
 ## Blockers
 
-Knowledge integration is BLOCKED because the configured Obsidian project note is unavailable.; Vault Git is DIRTY, so synchronization pull was not performed.; The project working tree has 65 uncommitted status entries and is not safe to pull or hand off as current remote state.
+無本次內容修改的 blocker；既有工作流升級變更仍未提交。
 
 ## Do Not Touch
 
-依 AGENTS.md 與 workflow.config.json 的 protectedPaths。
+依 AGENTS.md 與 workflow.config.json 的 protectedPaths；既有工作流升級變更須另案審查。
 
 ## Required Validation
 
-PASS
+PASS — 2026-08-26T15:36:01Z，`powershell -File scripts/project/validate.ps1`，exit code 0。
 
 ## Cross-Device Notes
 
-只有 Push Status 為 PUSHED 時，另一台電腦才可把遠端視為最新正式狀態。
+本次 JLPT N1 修改已推送；交接包由乾淨 HEAD 建立，不含本機既有未提交的工作流升級變更。
 
 ## Last Update
 
-- Time: 2026-08-11T01:57:54Z
+- Time: 2026-08-26T15:37:36Z
 - Agent: Codex
 - Computer: DESKTOP-IK99ESK
 - Branch: main
-- Commit: 4cdb89dd43003f3b3608bfb9e2845ffdb02ccccd
+- Commit: a4e2a3ec5077e9dfdd6d7ca683a9ea75008d2a2f
 - Push Status: PUSHED
 - Validation Status: PASS
 - Package Status: CREATED
