@@ -1086,3 +1086,29 @@ fatal: pathspec '02_Projects/codex-cross-device-workflow.md' did not match any f
 
 - Computer: DESKTOP-IK99ESK
 - Workflow version: 0.1.0
+
+## 2026-09-22T11:36:05.835Z — Codex / BLOCKED (external backup)
+
+### Changed
+
+- 刪除首頁指定句子與各頁重複小標；三語同步。
+- 專案主內容 Grid 改用 minmax(0,1fr)，避免表格及流程圖的最小內容寬度撐開整頁。
+
+### Validation
+
+- PASS：正式驗證 exit code 0；兩頁、三語、四種寬度共 24 組瀏覽器檢查通過；diff、新增敏感資訊及檔案大小檢查通過。
+
+### Git and Package
+
+- Branch: main
+- Content commit: 5588ae7c8c898019ba465803bf5affaa041e4c9c
+- Push: PUSHED，已核對遠端。
+- Package: CREATED；portfolio-website_handoff_20260922_113511.zip，SHA256 見同名側檔。
+- 包內遮蔽 HTML email 並排除兩個含本機路徑／email-like 內容的輔助檔。
+- Backup: FAILED，設定資料夾不存在，exit code 4。
+- 32 項既有工作流變更未提交、未打包；未執行資料整理或外部知識同步。
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0
