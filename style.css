@@ -1070,8 +1070,6 @@ body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:n
     .finding-row > span { justify-self:start; }
 }
 /* Recruiter scan and award lightbox refinement */
-.hero-positioning { width:fit-content; max-width:680px; margin:16px 0 0; padding:8px 12px; border:1px solid rgba(49,87,213,.15); border-radius:10px; background:rgba(239,244,255,.82); color:#2443ad; font-size:.82rem; font-weight:850; line-height:1.55; }
-.hero-positioning + .hero-lead { margin-top:13px; }
 .hero-actions .text-link { min-height:44px; display:inline-flex; align-items:center; }
 .project-glance { margin:13px 0 0; display:grid; gap:7px; }
 .project-glance div { display:grid; grid-template-columns:70px minmax(0,1fr); gap:8px; align-items:start; }
@@ -1099,7 +1097,6 @@ body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:n
 .award-lightbox-close { width:42px; height:42px; position:absolute; z-index:2; top:10px; right:10px; display:grid; place-items:center; border:1px solid #d5deec; border-radius:50%; background:rgba(255,255,255,.94); color:#17223a; font-size:1.45rem; line-height:1; cursor:pointer; box-shadow:0 7px 18px rgba(15,29,62,.14); }
 body.lightbox-open { overflow:hidden; }
 @media (max-width:560px) {
-    .hero-positioning { font-size:.76rem; }
     .project-glance div { grid-template-columns:64px minmax(0,1fr); }
     .research-subject { grid-template-columns:1fr; }
     .research-scope-list div { grid-template-columns:68px minmax(0,1fr); }
@@ -1233,7 +1230,7 @@ body.lightbox-open { overflow:hidden; }
 .observation-overlay i { height:7px; overflow:hidden; border-radius:99px; background:rgba(255,255,255,.14); }
 .observation-overlay i::after { content:""; display:block; width:var(--score); height:100%; border-radius:inherit; background:#e7b75d; }
 .visual-caption { margin:17px 0 0; color:var(--case-accent-dark); font-size:.66rem; font-weight:900; letter-spacing:.16em; text-align:center; }
-.case-study .detail-main { max-width:1200px; margin-top:16px; gap:18px; }
+.case-study .detail-main { max-width:1200px; margin-top:16px; grid-template-columns:minmax(0,1fr); gap:18px; }
 .case-index { min-height:58px; padding:8px; position:sticky; top:90px; z-index:70; display:flex; justify-content:center; gap:5px; overflow-x:auto; border:1px solid var(--case-line); border-radius:18px; background:rgba(255,255,255,.92); box-shadow:0 12px 30px rgba(15,23,42,.09); backdrop-filter:blur(14px); scrollbar-width:none; }
 .case-index::-webkit-scrollbar { display:none; }
 .case-index a { min-width:max-content; padding:10px 15px; border-radius:11px; color:#64748b; font-size:.73rem; font-weight:850; text-decoration:none; transition:.2s ease; }
