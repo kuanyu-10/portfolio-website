@@ -728,19 +728,15 @@ body {
 /* Qualification cards and formal award details */
 .qualification-overview { margin-top:26px; padding:24px; border:1px solid #dbe4f4; border-radius:24px; background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(239,244,255,.76)); box-shadow:0 12px 30px rgba(15,23,42,.045); }
 .qualification-intro { display:block; }
-.qualification-intro .eyebrow { margin-bottom:7px; }
 .qualification-intro h3 { margin:0; font-size:clamp(1.3rem,2.4vw,1.75rem); letter-spacing:-.03em; }
 
 .qualification-grid { margin-top:20px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
-.qualification-card { min-height:136px; padding:17px; display:flex; align-items:flex-start; gap:14px; border:1px solid #dce4f1; border-radius:18px; background:#fff; box-shadow:0 8px 20px rgba(15,23,42,.045); position:relative; overflow:hidden; }
-.qualification-card::after { content:""; position:absolute; inset:auto 0 0; height:3px; background:linear-gradient(90deg,#3157d5,#60a5fa); }
-.qualification-card.is-learning { background:linear-gradient(145deg,#fff,#fffaf0); }
-.qualification-card.is-learning::after { background:linear-gradient(90deg,#d97706,#fbbf24); }
-.credential-code { flex:0 0 52px; width:52px; height:52px; display:grid; place-items:center; border-radius:14px; background:linear-gradient(135deg,#1f3b9d,#4f73e9); color:#fff; font-size:.85rem; font-weight:950; letter-spacing:.04em; box-shadow:0 8px 18px rgba(49,87,213,.2); }
-.is-learning .credential-code { background:linear-gradient(135deg,#9a4d08,#e59b20); box-shadow:0 8px 18px rgba(217,119,6,.18); }
-.credential-status { display:inline-flex; padding:4px 7px; border-radius:999px; background:#eaf0ff; color:#294bbd; font-size:.75rem; font-weight:900; line-height:1; }
-.is-learning .credential-status { background:#fff0ce; color:#9a520c; }
-.qualification-card h4 { margin:8px 0 0; font-size:1.02rem; line-height:1.35; }
+.qualification-card { min-width:0; display:flex; flex-direction:column; align-items:stretch; gap:22px; border:1px solid #dce4f1; border-radius:14px; background:#fff; }
+.qualification-card > div { flex:1; min-width:0; }
+.credential-status { display:flex; align-items:center; gap:8px; padding-top:13px; border-top:1px solid #edf0f5; color:#3659ad; font-size:.78rem; font-weight:700; line-height:1.4; }
+.credential-status::before { content:""; width:6px; height:6px; flex:0 0 6px; border-radius:50%; background:currentColor; }
+.is-learning .credential-status { color:#9a620f; }
+.qualification-card h4 { margin:0; color:#17243c; font-size:1.08rem; line-height:1.55; overflow-wrap:anywhere; }
 .qualification-card p { margin:6px 0 0; color:#68758a; font-size:.9rem; line-height:1.55; }
 .research-feature { grid-template-columns:minmax(0,1.28fr) minmax(300px,.72fr); }
 .research-facts .analysis-fact { min-height:150px; }
@@ -854,12 +850,9 @@ body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:n
 .experience-section .career-list p { color:#5e6b7f; line-height:1.72; }
 
 .credentials-section { background:radial-gradient(circle at 96% 0%,rgba(56,189,248,.13),transparent 25rem),linear-gradient(145deg,#fbfdff,#f2f6fd) !important; }
-.qualification-overview { margin-top:30px; padding:26px; border-color:#d9e3f4; background:linear-gradient(145deg,rgba(255,255,255,.98),rgba(239,244,255,.9)); box-shadow:0 16px 38px rgba(15,29,62,.065); }
+.qualification-overview { margin-top:30px; padding:26px; border-color:#e0e7f0; background:#f7f9fc; box-shadow:none; }
 .qualification-grid { gap:14px; }
-.qualification-card { min-height:146px; padding:19px; border-color:#d9e3f2; box-shadow:0 10px 26px rgba(15,29,62,.055); transition:transform .24s ease,border-color .24s ease,box-shadow .24s ease; }
-.qualification-card::before { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(115deg,transparent 15%,rgba(255,255,255,.72) 45%,transparent 75%); transform:translateX(-130%); transition:transform .7s ease; }
-.qualification-card:hover::before { transform:translateX(130%); }
-.credential-code { width:49px; height:49px; flex-basis:49px; border-radius:15px; }
+.qualification-card { padding:22px; border-color:#e0e7f0; box-shadow:0 3px 12px rgba(15,29,62,.025); }
 .research-feature { margin-top:28px; border-color:rgba(188,211,255,.7); background:radial-gradient(circle at 92% 8%,rgba(125,211,252,.2),transparent 18rem),linear-gradient(135deg,#132454 0%,#2347b2 56%,#3b73e6 100%); box-shadow:0 28px 62px rgba(31,67,160,.23); }
 .research-feature::before { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(120deg,rgba(255,255,255,.07),transparent 38%); }
 .research-copy .research-insight { padding:14px 16px; border:1px solid rgba(255,255,255,.14); border-left:3px solid #7dd3fc; border-radius:0 13px 13px 0; background:rgba(4,16,48,.16); }
@@ -922,7 +915,7 @@ body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:n
 .hero-content > :nth-child(6) { animation-delay:.22s; }
 
 @media (hover:hover) {
-    .qualification-card:hover,.recognition-card:hover,.skill-grid article:hover,.integrated-delivery-list li:hover { transform:translateY(-6px); border-color:#b9cafa; box-shadow:0 20px 42px rgba(30,64,175,.11); }
+    .recognition-card:hover,.skill-grid article:hover,.integrated-delivery-list li:hover { transform:translateY(-6px); border-color:#b9cafa; box-shadow:0 20px 42px rgba(30,64,175,.11); }
 }
 @media (max-width:1100px) {
     .nav-menu a { padding-inline:7px; font-size:.69rem; }
