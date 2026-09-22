@@ -1059,3 +1059,30 @@ fatal: pathspec '02_Projects/codex-cross-device-workflow.md' did not match any f
 
 - Computer: DESKTOP-IK99ESK
 - Workflow version: 0.1.0
+
+## 2026-09-22T11:19:17.794Z — Codex / BLOCKED (external backup)
+
+### Changed
+
+- 更新 KDL 實習的期間、成果與三語內容。
+- 更新資格卡樣式，新增已取得的 C 語言 3 級、移除日商簿記 2 級並對調駕照與基本情報技術者試験。
+
+### Validation
+
+- PASS：正式驗證 exit code 0；三語、手機寬度、卡片順序與 diff 檢查通過。
+
+### Git and Package
+
+- Branch: main
+- Content commit: 94763382ffda22bb6e511cb155b26fe3fa2f3079
+- Push: PUSHED，已核對遠端 SHA。
+- Package: CREATED；portfolio-website_handoff_20260922_111814.zip，最終 SHA256 見同名側檔。
+- Package 隱私處理：遮蔽包內 HTML email；排除含本機路徑／email-like 內容的兩個輔助檔。
+- Backup: FAILED，設定資料夾不存在，exit code 4。
+- 32 個既有工作流升級變更未提交、未打包。
+- 未執行資料整理或外部知識同步；正式網站部署未另行實測。
+
+### Environment
+
+- Computer: DESKTOP-IK99ESK
+- Workflow version: 0.1.0

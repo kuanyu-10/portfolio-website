@@ -3,10 +3,10 @@
     "workflowVersion": "0.1.0",
     "project": "portfolio-website",
     "phase": "Portfolio content maintenance",
-    "status": "HANDOFF_READY",
+    "status": "BLOCKED",
     "workingBranch": "main",
-    "lastValidatedCommit": "a4e2a3ec5077e9dfdd6d7ca683a9ea75008d2a2f",
-    "lastKnownCommit": "a4e2a3ec5077e9dfdd6d7ca683a9ea75008d2a2f",
+    "lastValidatedCommit": "94763382ffda22bb6e511cb155b26fe3fa2f3079",
+    "lastKnownCommit": "94763382ffda22bb6e511cb155b26fe3fa2f3079",
     "lastComputer": "DESKTOP-IK99ESK",
     "lastAgent": "Codex",
     "hasUncommittedChanges": true,
@@ -17,10 +17,13 @@
     "validationStatus": "PASS",
     "packageStatus": "CREATED",
     "nextTasks": [
-        "Review and handle the pre-existing workflow upgrade changes separately."
+        "Restore or explicitly configure the external backup directory, then copy and verify the handoff ZIP.",
+        "Review the pre-existing workflow upgrade changes separately."
     ],
     "blockers": [
-        "The working tree still contains 32 pre-existing workflow upgrade status entries that were intentionally excluded from this task."
+        "Configured external backup directory is missing; backup failed with exit code 4."
     ],
-    "updatedAt": "2026-08-26T15:37:36Z"
+    "updatedAt": "2026-09-22T11:19:17.794Z",
+    "backupStatus": "FAILED",
+    "backupExitCode": 4
 }
