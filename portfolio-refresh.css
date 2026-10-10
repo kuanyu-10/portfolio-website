@@ -989,3 +989,96 @@ a:focus-visible, button:focus-visible, select:focus-visible {
   #skills .credentials-inline .recognition-card { grid-template-columns: 92px minmax(0,1fr) !important; }
   #skills .credentials-inline .recognition-card figure { height: 126px !important; }
 }
+
+/* ================================================================
+   Education reading order: most recent first, one item per row.
+   Dates remain in a stable left-hand column on desktops.
+   ================================================================ */
+#experience .education-order-note {
+  margin: 6px 0 0;
+  color: #757575;
+  font-size: .78rem;
+  font-weight: 600;
+  letter-spacing: .015em;
+}
+#experience .career-subsection:last-child .career-list.education-timeline {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 0 !important;
+  margin-top: 12px !important;
+  padding-left: 0 !important;
+  position: relative !important;
+}
+#experience .career-subsection:last-child .career-list.education-timeline::before {
+  content: none !important;
+  display: none !important;
+}
+#experience .career-subsection:last-child .career-list.education-timeline article,
+#experience .career-subsection:last-child .career-list.education-timeline article:hover {
+  display: grid !important;
+  grid-template-columns: 174px minmax(0, 1fr) !important;
+  align-items: start !important;
+  gap: clamp(15px, 2.5vw, 28px) !important;
+  margin: 0 !important;
+  padding: 17px 11px 17px 18px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e6e6e6 !important;
+  border-left: 2px solid #dadada !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+#experience .career-subsection:last-child .career-list.education-timeline article:first-child {
+  border-left-color: #262626 !important;
+}
+#experience .career-subsection:last-child .career-list.education-timeline article:last-child {
+  border-bottom: 0 !important;
+}
+#experience .career-subsection:last-child .career-list.education-timeline article::before {
+  content: none !important;
+  display: none !important;
+}
+#experience .career-subsection:last-child .career-list.education-timeline time {
+  display: block;
+  padding: 2px 0 0 !important;
+  color: #404040 !important;
+  font-size: .88rem !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+#experience .career-subsection:last-child .career-list.education-timeline time span:last-child:not(:first-child) {
+  font-size: .77rem;
+  color: #767676 !important;
+  font-weight: 600;
+}
+#experience .career-subsection:last-child .career-list.education-timeline article > div {
+  min-width: 0;
+}
+#experience .career-subsection:last-child .career-list.education-timeline h3 {
+  margin: 0 !important;
+  color: #222 !important;
+  font-size: 1.03rem !important;
+  line-height: 1.5 !important;
+}
+#experience .career-subsection:last-child .career-list.education-timeline p {
+  margin: 4px 0 0 !important;
+  color: #626262 !important;
+  font-size: .86rem !important;
+  line-height: 1.57 !important;
+}
+@media (max-width: 720px) {
+  #experience .career-subsection:last-child .career-list.education-timeline article,
+  #experience .career-subsection:last-child .career-list.education-timeline article:hover {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: 4px !important;
+    padding: 14px 10px 15px 15px !important;
+  }
+  #experience .career-subsection:last-child .career-list.education-timeline time {
+    white-space: normal;
+    font-size: .82rem !important;
+  }
+}
