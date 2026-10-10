@@ -1,0 +1,97 @@
+/* ================================================================
+   STEP 01：白背景・黒文字だけの共通デザイン
+   ボタンやカードにも白背景を使用し、黒い枠線で区切る。
+================================================================ */
+:root { color-scheme: light; font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", "Noto Sans TC", "Yu Gothic", "Microsoft JhengHei", sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #fff; color: #000; line-height: 1.5; }
+button { font: inherit; cursor: pointer; }
+a { color: #000; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid #000; outline-offset: 3px; }
+
+/* ================================================================
+   STEP 02：ヘッダー／トップの説明
+================================================================ */
+.site-header { border-bottom: 2px solid #000; background: #fff; }
+.header-inner { width: min(1160px, calc(100% - 36px)); margin: auto; min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.brand { font-size: 26px; font-weight: 800; letter-spacing: .02em; text-decoration: none; white-space: nowrap; }
+.brand span { font-size: 15px; font-weight: 500; margin-left: 10px; }
+.main-nav { display: flex; align-items: center; gap: 10px; }
+.nav-link { border: 1px solid #000; background: #fff; color: #000; padding: 8px 20px; border-radius: 0; }
+.nav-link.active { background: #fff; color: #000; border-bottom: 4px solid #000; font-weight: 700; }
+.nav-link:hover { text-decoration: underline; }
+.container { width: min(1160px, calc(100% - 36px)); margin: 40px auto 64px; }
+.page-heading { padding-bottom: 22px; border-bottom: 1px solid #000; }
+h1 { font-size: clamp(30px, 4vw, 42px); letter-spacing: .07em; margin: 0 0 8px; }
+.page-heading p { margin: 6px 0; font-size: 15px; }
+.small-note { font-size: 13px !important; }
+
+/* ================================================================
+   STEP 03：注音カード一覧（参考画像に近いタイル形式）
+   左の注音ボタン + 右の単語ボタン。別々の音声を再生する。
+================================================================ */
+.symbol-section { margin-top: 30px; }
+.section-title { font-size: 17px; font-weight: 700; margin: 0 0 3px; }
+.section-description { font-size: 13px; margin: 0 0 14px; }
+.card-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.symbol-card { display: grid; grid-template-columns: 40% 60%; border: 1.5px solid #000; min-height: 169px; background: #fff; }
+.sound-button, .word-button { background: #fff; border: 0; color: #000; min-width: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 9px 6px; }
+.sound-button { border-right: 1px solid #000; }
+.sound-button:hover, .word-button:hover { text-decoration: underline; }
+.symbol-char { font-size: 51px; line-height: 1.15; font-weight: 500; }
+.kana { text-align: center; margin-top: 8px; font-size: 11px; line-height: 1.3; font-weight: 600; }
+/* 例単語：漢字 → 注音 → 日本語の近似音 → 意味 の順に表示 */
+.word-text { font-size: 23px; font-weight: 700; }
+.word-zhuyin { font-size: 13px; font-weight: 600; margin-top: 4px; text-align: center; overflow-wrap: anywhere; }
+.word-kana { font-size: 11px; margin-top: 5px; text-align: center; overflow-wrap: anywhere; }
+.word-meaning { font-size: 12px; text-align: center; margin-top: 4px; }
+.play-hint { font-size: 11px; margin-top: 8px; text-decoration: underline; }
+
+/* ================================================================
+   STEP 04：クイズ（開始／4択／結果）
+================================================================ */
+.quiz-panel { max-width: 610px; margin: 34px auto 70px; padding: 32px; border: 2px solid #000; text-align: center; }
+.quiz-panel h2 { font-size: 23px; margin: 8px 0; }
+.intro-symbol { font-size: 76px; font-weight: 600; line-height: 1.3; }
+.solid-button { border: 2px solid #000; color: #000; background: #fff; font-weight: 700; padding: 12px 25px; margin-top: 14px; }
+.solid-button:hover { text-decoration: underline; }
+.quiz-meta { display: flex; justify-content: space-between; border-bottom: 1px solid #000; padding-bottom: 16px; font-weight: 700; }
+.quiz-glyph { font-size: 105px; line-height: 1.45; margin-top: 12px; }
+.quiz-prompt { margin: 0 0 18px; font-weight: 600; }
+.answer-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.answer-button { background: #fff; border: 1.5px solid #000; color: #000; padding: 15px 10px; min-height: 70px; font-weight: 600; }
+.answer-button:hover:not(:disabled) { text-decoration: underline; border-width: 2.5px; }
+.answer-button:disabled { cursor: default; }
+.answer-button.correct { outline: 3px solid #000; outline-offset: -6px; }
+.answer-button.wrong { text-decoration: line-through; }
+.answer-feedback { min-height: 54px; padding-top: 9px; margin: 14px 0 0; font-size: 14px; }
+.result-caption { font-weight: 700; }
+.result-score { font-size: 56px; font-weight: 800; margin: 12px 0; }
+
+/* ================================================================
+   STEP 05：フッター＆レスポンシブ対応
+================================================================ */
+.audio-message { text-align: center; min-height: 1.5em; padding: 0 18px; margin: 0 0 18px; font-size: 13px; }
+.audio-message:empty { min-height: 0; margin: 0; }
+.site-footer { border-top: 1px solid #000; padding: 21px 18px 28px; text-align: center; font-size: 12px; }
+.site-footer p { margin: 5px 0; }
+@media (max-width: 940px) { .card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 660px) {
+  .header-inner { min-height: 68px; width: calc(100% - 24px); }
+  .brand { font-size: 19px; }
+  .brand span { font-size: 12px; margin-left: 4px; }
+  .main-nav { gap: 5px; }
+  .nav-link { padding: 7px 9px; font-size: 14px; }
+  .container { width: calc(100% - 24px); margin-top: 25px; }
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .symbol-card { min-height: 175px; }
+  .symbol-char { font-size: 43px; }
+  .word-text { font-size: 21px; }
+  .word-zhuyin { font-size: 12px; }
+  .word-kana { font-size: 10px; }
+  .quiz-panel { padding: 20px 13px; }
+  .answer-list { gap: 9px; }
+  .answer-button { font-size: 13px; }
+}
+@media (max-width: 365px) { .brand span { display: none; } .kana, .word-meaning { font-size: 10px; } }
