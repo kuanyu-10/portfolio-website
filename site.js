@@ -33,7 +33,7 @@
         }
     });
     window.addEventListener("resize", () => {
-        if (window.innerWidth > 820) setMenu(false);
+        if (window.innerWidth > 1023) setMenu(false);
     });
     new MutationObserver(() => setMenu(toggle.getAttribute("aria-expanded") === "true")).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
     setMenu(false);
