@@ -768,10 +768,23 @@ a:focus-visible, button:focus-visible, select:focus-visible {
 .project-simple-grid { margin-top: 18px !important; gap: 15px !important; }
 .project-simple-card { border-radius: 13px !important; }
 .project-simple-visual {
-  height: 118px !important;
-  padding: 15px 21px !important;
+  /* Content defines the height, so subtitles cannot overlap the title. */
+  height: auto !important;
+  min-height: 152px !important;
+  padding: 16px 21px !important;
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: center !important;
+  row-gap: 5px;
 }
-.project-simple-visual strong { font-size: clamp(1.35rem, 2.15vw, 1.95rem) !important; }
+.project-simple-visual strong {
+  font-size: clamp(1.30rem, 1.95vw, 1.78rem) !important;
+  line-height: 1.12 !important;
+  overflow-wrap: normal;
+}
+.project-simple-visual-kobe strong { letter-spacing: .035em; }
+.project-simple-visual-detail,
+.project-simple-visual-kicker { display: block; line-height: 1.45; }
 .project-simple-visual-zhuyin strong { font-size: clamp(1.8rem, 3.4vw, 2.5rem) !important; }
 .project-simple-body { padding: 17px 20px 18px !important; }
 .project-simple-body h3 {
@@ -982,7 +995,11 @@ a:focus-visible, button:focus-visible, select:focus-visible {
   .home-main .section { padding: 22px 18px !important; }
   .compact-skill-grid { grid-template-columns: 1fr; }
   .compact-skill-grid .compact-skill-card:last-child { grid-column: auto; }
-  .project-simple-visual { height: 105px !important; }
+  .project-simple-visual {
+    height: auto !important;
+    min-height: 144px !important;
+    padding: 13px 16px !important;
+  }
   .project-simple-body { padding: 15px 16px !important; }
   #skills .credentials-inline .qualification-grid { grid-template-columns: 1fr !important; }
   #skills .credentials-inline .research-facts { grid-template-columns: 1fr 1fr !important; }
