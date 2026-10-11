@@ -1082,3 +1082,17 @@ a:focus-visible, button:focus-visible, select:focus-visible {
     font-size: .82rem !important;
   }
 }
+
+/* Temporary migration phase: show GitHub source alongside working demo. */
+.project-simple-footer .project-repo-link {
+  margin-left: auto;
+  padding: 8px 2px;
+  color: #474747;
+  font-size: .8rem;
+  font-weight: 650;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.project-simple-footer .project-repo-link:hover { color: #111; }
+.project-simple-footer .project-repo-link + .project-simple-link { margin-left: 0; }
